@@ -1,0 +1,6 @@
+{
+    "namespace": "BarfSourceName",
+    "Database": {
+        "type": "SqlServer"
+    }
+}

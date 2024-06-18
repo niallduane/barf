@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Niall",
+    "classifications": [
+        "barf infrastructure",
+        "clean architecture"
+    ],
+    "identity": "barf.infrastructure",
+    "name": "barf.infrastructure",
+    "shortName": "barf-infra",
+    "sourceName": "BarfTemplateName",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "description": "Creates a infrastructure project in an Barf Solution",
+    "preferNameDirectory": false,
+    "symbols": {
+        "nameSpace": {
+            "description": "infrastructure namespace",
+            "dataType": "string",
+            "type": "parameter",
+            "defaultValue": "barf",
+            "isRequired": true,
+            "replaces": "BarfSourceName",
+            "fileRename": "BarfSourceName"
+        }
+    }
+}

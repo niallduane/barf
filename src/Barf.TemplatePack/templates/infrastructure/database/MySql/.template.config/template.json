@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Niall",
+  "classifications": [
+    "add mysql",
+    "clean architecture"
+  ],
+  "identity": "Barf.database.mysql",
+  "name": "Barf.database.MySql",
+  "shortName": "barf-database-mysql",
+  "sourceName": "BarfSourceName",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "description": "Add mysql",
+  "preferNameDirectory": false
+}

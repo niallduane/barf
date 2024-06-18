@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Niall",
+  "classifications": [
+    "add mysql",
+    "clean architecture"
+  ],
+  "identity": "Barf.database.sqlserver",
+  "name": "Barf.database.sqlserver",
+  "shortName": "barf-database-sqlserver",
+  "sourceName": "BarfSourceName",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "description": "Add sqlserver",
+  "preferNameDirectory": false
+}

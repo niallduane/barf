@@ -1,0 +1,32 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+# To Start, Run command `docker-compose up -d --build`
+
+version: '3.4'
+
+services:
+  barfsourcename-db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    ports:
+      - '3308:3306'
+    volumes:
+      - barfsourcename-db:/var/lib/mysql
+      - ./scripts/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./scripts/sql/local:/tmp/scripts
+    environment:
+      - MYSQL_DATABASE=barfsourcename
+      - MYSQL_ROOT_PASSWORD=P@ssw0rd
+    command:
+      [
+        'mysqld',
+        '--character-set-server=utf8mb4',
+        '--collation-server=utf8mb4_unicode_ci'
+      ]
+    working_dir: /tmp/scripts
+
+volumes:
+  barfsourcename-db:
+    driver: local
