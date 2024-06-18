@@ -11,7 +11,8 @@ public class NewSolutionCommand : Command
     public enum DbType
     {
         Mysql = 0,
-        SqlServer = 1
+        SqlServer = 1,
+        Postgres = 2,
     }
     public NewSolutionCommand() : base("new", "creates a new barf solution")
     {
@@ -44,6 +45,13 @@ public class NewSolutionCommand : Command
                 .Replace("$SOLUTION_NAME", solutionName));
 
             shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"server=localhost;port=3308;database={solutionName};uid=root;pwd=P@ssw0rd;ConvertZeroDateTime=True\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
+        }
+        else if (dbType == DbType.Postgres)
+        {
+            shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddPostgres.ps1")
+                .Replace("$SOLUTION_NAME", solutionName));
+
+            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost;Port=3308;Database={solutionName};Username=root;Password=P@ssw0rd;\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
         }
         else
         {
