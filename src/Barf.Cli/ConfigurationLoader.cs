@@ -21,7 +21,7 @@ public class ConfigurationLoader
         string fileContent = File.ReadAllText(filePath);
         Console.WriteLine($"configuration contents: {fileContent}");
 
-        var config = JsonSerializer.Deserialize<BarfConfiguration>(fileContent);
+        var config = Json.Deserialize<BarfConfiguration>(fileContent);
         if (config != null)
         {
             config.WorkingDirectory = currentDirectory;
@@ -42,6 +42,6 @@ public class ConfigurationLoader
             return;
         }
 
-        File.WriteAllText(filePath, JsonSerializer.Serialize(configuration));
+        File.WriteAllText(filePath, Json.Serialize(configuration));
     }
 }
