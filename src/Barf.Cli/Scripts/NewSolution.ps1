@@ -1,23 +1,24 @@
-dotnet new editorconfig --force;
-dotnet new gitignore --force;
-dotnet new tool-manifest --force;
+dotnet new editorconfig;
+dotnet new gitignore;
+dotnet new tool-manifest;
+dotnet new globaljson --roll-forward feature;
 
 dotnet tool install swashbuckle.aspnetcore.cli;
 dotnet tool install dotnet-ef;
 dotnet tool install dotnet-format;
 
-dotnet new sln -n "$SOLUTION_NAME" --force;
+dotnet new sln -n "$SOLUTION_NAME";
 
-dotnet new classlib -n "$SOLUTION_NAME.Domain.Core" -o "./src/1.Domain/$SOLUTION_NAME.Domain.Core" --force;
+dotnet new classlib -n "$SOLUTION_NAME.Domain.Core" -o "./src/1.Domain/$SOLUTION_NAME.Domain.Core";
 dotnet sln add "./src/1.Domain/$SOLUTION_NAME.Domain.Core/$SOLUTION_NAME.Domain.Core.csproj";
 
-dotnet new classlib -n "$SOLUTION_NAME.Domain.Services" -o "./src/1.Domain/$SOLUTION_NAME.Domain.Services" --force;
+dotnet new classlib -n "$SOLUTION_NAME.Domain.Services" -o "./src/1.Domain/$SOLUTION_NAME.Domain.Services";
 dotnet add "./src/1.Domain/$SOLUTION_NAME.Domain.Services/$SOLUTION_NAME.Domain.Services.csproj" reference "./src/1.Domain/$SOLUTION_NAME.Domain.Core/$SOLUTION_NAME.Domain.Core.csproj";
 dotnet sln add "./src/1.Domain/$SOLUTION_NAME.Domain.Services/$SOLUTION_NAME.Domain.Services.csproj";
 
-dotnet new classlib -n "$SOLUTION_NAME.Infrastructure.Database" -o "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database" --force;
-dotnet new classlib -n "$SOLUTION_NAME.Infrastructure.Database.Repositories" -o "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database.Repositories" --force;
-dotnet new xunit -n "$SOLUTION_NAME.Infrastructure.Database.Tests" -o "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database.Tests" --force;
+dotnet new classlib -n "$SOLUTION_NAME.Infrastructure.Database" -o "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database";
+dotnet new classlib -n "$SOLUTION_NAME.Infrastructure.Database.Repositories" -o "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database.Repositories";
+dotnet new xunit -n "$SOLUTION_NAME.Infrastructure.Database.Tests" -o "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database.Tests";
 
 dotnet user-secrets init -p "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database/$SOLUTION_NAME.Infrastructure.Database.csproj" --id "$SOLUTION_NAME-local-settings";
 
@@ -40,8 +41,8 @@ dotnet sln add "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Da
 dotnet sln add "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database.Tests/$SOLUTION_NAME.Infrastructure.Database.Tests.csproj";
 dotnet sln add "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database.Repositories/$SOLUTION_NAME.Infrastructure.Database.Repositories.csproj";
 
-dotnet new classlib -n "$SOLUTION_NAME.Services" -o "./src/3.Services/$SOLUTION_NAME.Services" --force;
-dotnet new xunit -n "$SOLUTION_NAME.Services.Tests" -o "./src/3.Services/$SOLUTION_NAME.Services.Tests" --force;
+dotnet new classlib -n "$SOLUTION_NAME.Services" -o "./src/3.Services/$SOLUTION_NAME.Services";
+dotnet new xunit -n "$SOLUTION_NAME.Services.Tests" -o "./src/3.Services/$SOLUTION_NAME.Services.Tests";
 
 dotnet add "./src/3.Services/$SOLUTION_NAME.Services/$SOLUTION_NAME.Services.csproj" reference "./src/1.Domain/$SOLUTION_NAME.Domain.Core/$SOLUTION_NAME.Domain.Core.csproj";
 dotnet add "./src/3.Services/$SOLUTION_NAME.Services/$SOLUTION_NAME.Services.csproj" reference "./src/1.Domain/$SOLUTION_NAME.Domain.Services/$SOLUTION_NAME.Domain.Services.csproj";
@@ -57,7 +58,7 @@ dotnet add "./src/3.Services/$SOLUTION_NAME.Services.Tests/$SOLUTION_NAME.Servic
 dotnet sln add "./src/3.Services/$SOLUTION_NAME.Services/$SOLUTION_NAME.Services.csproj";
 dotnet sln add "./src/3.Services/$SOLUTION_NAME.Services.Tests/$SOLUTION_NAME.Services.Tests.csproj";
 
-dotnet new webapi -n "$SOLUTION_NAME.Presentation.Api" -o "./src/4.Presentation/$SOLUTION_NAME.Presentation.Api" --use-controllers true --force;
+dotnet new webapi -n "$SOLUTION_NAME.Presentation.Api" -o "./src/4.Presentation/$SOLUTION_NAME.Presentation.Api" --use-controllers true;
 
 dotnet user-secrets init -p "./src/4.Presentation/$SOLUTION_NAME.Presentation.Api/$SOLUTION_NAME.Presentation.Api.csproj" --id "$SOLUTION_NAME-local-settings";
 
