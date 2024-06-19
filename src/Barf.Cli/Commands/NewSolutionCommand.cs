@@ -1,19 +1,14 @@
 using System.CommandLine;
-using System.Diagnostics;
 using System.Reflection;
 
 using Barf.Cli.Extensions;
+using Barf.Cli.Types;
 
 namespace Barf.Cli.Commands;
 
 public class NewSolutionCommand : Command
 {
-    public enum DbType
-    {
-        Mysql = 0,
-        SqlServer = 1,
-        Postgres = 2,
-    }
+
     public NewSolutionCommand() : base("new", "creates a new barf solution")
     {
         var name = new Argument<string>
@@ -39,12 +34,16 @@ public class NewSolutionCommand : Command
         shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.NewSolution.ps1")
             .Replace("$SOLUTION_NAME", solutionName));
 
+        var config = ConfigurationLoader.LoadBarfFile()!;
+
         if (dbType == DbType.Mysql)
         {
             shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddMySql.ps1")
                 .Replace("$SOLUTION_NAME", solutionName));
 
             shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"server=localhost;port=3308;database={solutionName};uid=root;pwd=P@ssw0rd;ConvertZeroDateTime=True\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
+
+            config.Database!.Type = DbType.Mysql;
         }
         else if (dbType == DbType.Postgres)
         {
@@ -52,6 +51,8 @@ public class NewSolutionCommand : Command
                 .Replace("$SOLUTION_NAME", solutionName));
 
             shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost;Port=3308;Database={solutionName};Username=root;Password=P@ssw0rd;\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
+
+            config.Database!.Type = DbType.Postgres;
         }
         else
         {
@@ -59,6 +60,8 @@ public class NewSolutionCommand : Command
                 .Replace("$SOLUTION_NAME", solutionName));
 
             shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost,1401;Database={solutionName};User Id=sa;Password=P@ssw0rd;\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
+
+            config.Database!.Type = DbType.SqlServer;
         }
 
         shell.DeleteFileInSubDirectories("Class1.cs");
@@ -138,6 +141,8 @@ dotnet_naming_style.prefix_underscore.required_prefix = _
         ");
 
         FileUpdater.UpdateContent(editorConfigPath, "end_of_line = crlf", @"end_of_line = lf");
+
+        ConfigurationLoader.Update(config);
 
         shell.DotnetFormat();
 

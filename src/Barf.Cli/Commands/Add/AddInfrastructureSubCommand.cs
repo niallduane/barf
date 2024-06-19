@@ -1,5 +1,4 @@
 using System.CommandLine;
-using System.Diagnostics;
 using System.Reflection;
 
 using Barf.Cli.Extensions;

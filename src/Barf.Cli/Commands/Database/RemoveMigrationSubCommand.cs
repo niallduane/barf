@@ -2,9 +2,9 @@ using System.CommandLine;
 
 namespace Barf.Cli.Commands;
 
-public class UpdateDatabaseSubCommand : Command
+public class RemoveMigrationSubCommand : Command
 {
-    public UpdateDatabaseSubCommand() : base("update")
+    public RemoveMigrationSubCommand() : base("remove", "Remove last migration in codebase")
     {
         this.SetHandler(() => Execute());
     }
@@ -16,7 +16,7 @@ public class UpdateDatabaseSubCommand : Command
         ConsoleWriter.Start("Updating Database");
 
         var shell = new ProcessShell();
-        shell.Execute("dotnet", $"ef database update", $"./src/2.Infrastructure/Database/{ns}.Infrastructure.Database");
+        shell.Execute("dotnet", "ef database remove", $"./src/2.Infrastructure/Database/{ns}.Infrastructure.Database");
 
         ConsoleWriter.Success("Database Updated");
     }
