@@ -12,7 +12,7 @@ public interface IBarfTemplateNameService
     Task<GetBarfTemplateNameResponse> GetBarfTemplateName(string barftemplatenameId);
     Task<PagedList<ListBarfTemplateNameItem>> ListBarfTemplateNames(ListBarfTemplateNameRequest request);
     Task<CreateBarfTemplateNameResponse> CreateBarfTemplateName(CreateBarfTemplateNameRequest request);
-    //Task<UpdateBarfTemplateNameResponse> UpdateBarfTemplateName(string barftemplatenameId, PatchBodyRequest<UpdateBarfTemplateNameRequest> request);
+    Task<UpdateBarfTemplateNameResponse> UpdateBarfTemplateName(string barftemplatenameId, PatchRequest<UpdateBarfTemplateNameRequest> request);
     Task<UpsertResult<UpsertBarfTemplateNameResponse>> UpsertBarfTemplateName(string barftemplatenameId, UpsertBarfTemplateNameRequest request);
     Task<DeleteBarfTemplateNameResponse> DeleteBarfTemplateName(string barftemplatenameId);
 }

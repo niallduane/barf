@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 
+using BarfSourceName.Presentation.Api.Attributes;
+
 namespace BarfSourceName.Presentation.Api.Startup;
 
 public static class SwaggerRegistration
@@ -24,6 +26,8 @@ public static class SwaggerRegistration
                 Version = "v1",
                 Description = ""
             });
+
+            options.OperationFilter<RequestPatchOperationFilter>();
 
             // options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             // {

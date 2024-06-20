@@ -30,10 +30,10 @@ public class BarfTemplateNameService : IBarfTemplateNameService
         throw new NotImplementedException();
     }
 
-    // public Task<UpdateBarfTemplateNameResponse> UpdateBarfTemplateName(string barftemplatenameId, PatchBodyRequest<UpdateBarfTemplateNameRequest> request)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    public Task<UpdateBarfTemplateNameResponse> UpdateBarfTemplateName(string barftemplatenameId, PatchRequest<UpdateBarfTemplateNameRequest> request)
+    {
+        throw new NotImplementedException();
+    }
 
     public Task<UpsertResult<UpsertBarfTemplateNameResponse>> UpsertBarfTemplateName(string barftemplatenameId, UpsertBarfTemplateNameRequest request)
     {

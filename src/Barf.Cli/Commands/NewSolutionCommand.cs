@@ -65,9 +65,10 @@ public class NewSolutionCommand : Command
         {
             {
                 "var builder = WebApplication.CreateBuilder(args);",
-                @$"
+                @$"using {solutionName}.Presentation.Api.Attributes;
 using {solutionName}.Presentation.Api.Filters;
 using {solutionName}.Presentation.Api.Startup;
+
 var builder = WebApplication.CreateBuilder(args);"
             },
             {
@@ -77,8 +78,11 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ExceptionHandlerFilter>();
     options.Filters.Add<ModelStateFilter>();
-});
 
+    options.ModelBinderProviders.Add(new RequestPatchBinderProvider());
+}).AddJsonOptions(options => Json.SetOptions(options.JsonSerializerOptions));
+
+builder.Services.RegisterAuthentication(builder.Configuration);
 builder.Services.Register(builder.Configuration);
         "
             },
