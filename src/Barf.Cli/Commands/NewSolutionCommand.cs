@@ -38,19 +38,22 @@ public class NewSolutionCommand : Command
 
         if (dbType == DbType.Mysql)
         {
+            var dbName = solutionName.ToLower();
             shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddMySql.ps1")
                 .Replace("$SOLUTION_NAME", solutionName));
 
-            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"server=localhost;port=3308;database={solutionName};uid=root;pwd=P@ssw0rd;ConvertZeroDateTime=True\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
+            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"server=localhost;port=3308;database={dbName}db;uid=root;pwd=P@ssw0rd;ConvertZeroDateTime=True\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
 
             config.Database!.Type = DbType.Mysql;
         }
         else if (dbType == DbType.Postgres)
         {
+            var dbName = solutionName.ToLower();
+
             shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddPostgres.ps1")
                 .Replace("$SOLUTION_NAME", solutionName));
 
-            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost;Port=3308;Database={solutionName};Username=root;Password=P@ssw0rd;\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
+            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost;Port=5432;Database={dbName}db;Username=root;Password=P@ssw0rd;\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
 
             config.Database!.Type = DbType.Postgres;
         }

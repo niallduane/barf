@@ -8,5 +8,6 @@ public class DBCommand : Command
     {
         this.AddCommand(new AddMigrationSubCommand());
         this.AddCommand(new UpdateDatabaseSubCommand());
+        this.AddCommand(new RunShellSubCommand());
     }
 }

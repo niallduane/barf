@@ -2,8 +2,6 @@
 
 # To Start, Run command `docker-compose up -d --build`
 
-version: '3.4'
-
 services:
   barfsourcename-db:
     image: postgres:14-alpine
@@ -14,7 +12,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=P@ssw0rd
       - POSTGRES_USER=root
-      - POSTGRES_DB=barfsourcename
+      - POSTGRES_DB=barfsourcenamedb
     working_dir: /tmp/scripts
 
 

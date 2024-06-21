@@ -1,6 +1,8 @@
 {
     "namespace": "BarfSourceName",
     "database": {
-        "type": "SqlServer"
+        "type": "SqlServer",
+        "name": "barfsourcenamedb",
+        "containerId": "barfsourcename-db"
     }
 }

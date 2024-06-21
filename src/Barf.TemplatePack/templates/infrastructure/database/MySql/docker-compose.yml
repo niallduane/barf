@@ -2,8 +2,6 @@
 
 # To Start, Run command `docker-compose up -d --build`
 
-version: '3.4'
-
 services:
   barfsourcename-db:
     image: mysql:8.0

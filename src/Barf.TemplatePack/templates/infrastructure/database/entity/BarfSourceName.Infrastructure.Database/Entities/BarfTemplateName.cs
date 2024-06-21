@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BarfSourceName.Infrastructure.Database.Entities;
 
-[Table("BarfTemplateName")]
+[Table("BarfTemplateNames")]
 public class BarfTemplateName
 {
     [Key]
