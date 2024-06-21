@@ -62,7 +62,7 @@ public class NewSolutionCommand : Command
             shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddSqlServer.ps1")
                 .Replace("$SOLUTION_NAME", solutionName));
 
-            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost,1401;Database={solutionName};User Id=sa;Password=P@ssw0rd;\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
+            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost,1433;Database={solutionName};User Id=sa;Password=P@ssw0rd;\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
 
             config.Database!.Type = DbType.SqlServer;
         }
