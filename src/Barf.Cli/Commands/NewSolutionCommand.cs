@@ -44,7 +44,8 @@ public class NewSolutionCommand : Command
                 Type = DbType.Mysql,
                 Name = solutionName.ToLower(),
                 Username = "root",
-                Password = "P@ssw0rd"
+                Password = "P@ssw0rd",
+                ContainerId = $"{solutionName.ToLower()}-db"
             };
 
             shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddMySql.ps1")
@@ -59,7 +60,8 @@ public class NewSolutionCommand : Command
                 Type = DbType.Postgres,
                 Name = solutionName.ToLower(),
                 Username = "root",
-                Password = "P@ssw0rd"
+                Password = "P@ssw0rd",
+                ContainerId = $"{solutionName.ToLower()}-db"
             };
 
             shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddPostgres.ps1")
@@ -74,7 +76,8 @@ public class NewSolutionCommand : Command
                 Type = DbType.SqlServer,
                 Name = solutionName,
                 Username = "sa",
-                Password = "P@ssw0rd"
+                Password = "P@ssw0rd",
+                ContainerId = $"{solutionName.ToLower()}-db"
             };
 
             shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddSqlServer.ps1")
