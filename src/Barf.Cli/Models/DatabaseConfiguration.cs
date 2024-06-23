@@ -12,4 +12,8 @@ public class DatabaseConfiguration
     public string? Name { get; set; }
     [JsonPropertyName("containerId")]
     public string? ContainerId { get; set; }
+    [JsonPropertyName("username")]
+    public string Username { get; set; }
+    [JsonPropertyName("password")]
+    public string? Password { get; set; }
 }

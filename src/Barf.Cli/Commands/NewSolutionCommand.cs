@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Barf.Cli.Extensions;
 using Barf.Cli.Types;
+using Barf.Cli.Models;
 
 namespace Barf.Cli.Commands;
 
@@ -38,33 +39,48 @@ public class NewSolutionCommand : Command
 
         if (dbType == DbType.Mysql)
         {
-            var dbName = solutionName.ToLower();
+            config.Database = new DatabaseConfiguration
+            {
+                Type = DbType.Mysql,
+                Name = solutionName.ToLower(),
+                Username = "root",
+                Password = "P@ssw0rd"
+            };
+
             shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddMySql.ps1")
                 .Replace("$SOLUTION_NAME", solutionName));
 
-            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"server=localhost;port=3308;database={dbName}db;uid=root;pwd=P@ssw0rd;ConvertZeroDateTime=True\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
-
-            config.Database!.Type = DbType.Mysql;
+            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"server=localhost;port=3308;database={config.Database.Name}db;uid={config.Database.Username};pwd={config.Database.Password};ConvertZeroDateTime=True\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
         }
         else if (dbType == DbType.Postgres)
         {
-            var dbName = solutionName.ToLower();
+            config.Database = new DatabaseConfiguration
+            {
+                Type = DbType.Postgres,
+                Name = solutionName.ToLower(),
+                Username = "root",
+                Password = "P@ssw0rd"
+            };
 
             shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddPostgres.ps1")
                 .Replace("$SOLUTION_NAME", solutionName));
 
-            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost;Port=5432;Database={dbName}db;Username=root;Password=P@ssw0rd;\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
-
-            config.Database!.Type = DbType.Postgres;
+            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost;Port=5432;Database={config.Database.Name}db;Username={config.Database.Username};Password={config.Database.Password};\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
         }
-        else
+        else if (dbType == DbType.SqlServer)
         {
+            config.Database = new DatabaseConfiguration
+            {
+                Type = DbType.SqlServer,
+                Name = solutionName,
+                Username = "sa",
+                Password = "P@ssw0rd"
+            };
+
             shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddSqlServer.ps1")
                 .Replace("$SOLUTION_NAME", solutionName));
 
-            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost,1433;Database={solutionName};User Id=sa;Password=P@ssw0rd;\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
-
-            config.Database!.Type = DbType.SqlServer;
+            shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost,1433;Database={config.Database.Name};User Id={config.Database.Username};Password={config.Database.Password};TrustServerCertificate=True;\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
         }
 
         shell.DeleteFileInSubDirectories("Class1.cs");

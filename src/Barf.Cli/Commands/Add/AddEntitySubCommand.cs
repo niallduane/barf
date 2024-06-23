@@ -35,9 +35,8 @@ public class AddEntitySubCommand : Command
         var entityRegistration = Path.Combine(Directory.GetCurrentDirectory(), $"src/2.Infrastructure/Database/{nameSpace}.Infrastructure.Database/DatabaseContext.cs");
         FileUpdater.UpdateContent(entityRegistration, new Dictionary<string, string>() {
             {
-        @"public class DatabaseContext : DbContext
-{", $@"public class DatabaseContext : DbContext
-{{
+        @"// <!-- barf injection token -->",
+        $@"// <!-- barf injection token -->
     public virtual DbSet<{name}> {name}s {{ get; set; }}
 "
             }
@@ -50,9 +49,8 @@ public class AddEntitySubCommand : Command
         var entityFactoryRegistration = Path.Combine(Directory.GetCurrentDirectory(), $"src/2.Infrastructure/Database/{nameSpace}.Infrastructure.Database.Tests/InMemoryDatabaseContext.cs");
         FileUpdater.UpdateContent(entityFactoryRegistration, new Dictionary<string, string>() {
             {
-@"private void Seed()
-    {", $@"private void Seed()
-    {{
+        @"// <!-- barf injection token -->",
+        $@"// <!-- barf injection token -->
         this.{name}s.AddRange(new {name}Factory().Generate(100));
 "
             }

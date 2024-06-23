@@ -35,10 +35,8 @@ public class AddRepositorySubCommand : Command
     {
         var repositoryRegistration = Path.Combine(Directory.GetCurrentDirectory(), $"src/2.Infrastructure/Database/{nameSpace}.Infrastructure.Database.Repositories/DependencyRegistration.cs");
         FileUpdater.UpdateContent(repositoryRegistration,
-        @"public static void RegisterRepositories(this IServiceCollection services, IConfiguration config)
-    {",
-        $@"public static void RegisterRepositories(this IServiceCollection services, IConfiguration config)
-    {{
+        @"// <!-- barf injection token -->",
+        $@"// <!-- barf injection token -->
         services.AddTransient<{name}s.I{name}Repository, {name}s.{name}Repository>();
             ");
     }

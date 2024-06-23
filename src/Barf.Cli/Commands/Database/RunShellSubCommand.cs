@@ -21,19 +21,18 @@ public class RunShellSubCommand : Command
         var shell = new ProcessShell();
         if (config.Database.Type == DbType.Mysql)
         {
-            shell.Execute("docker", $"compose exec {config.Database.ContainerId} mysql -u root -pP@ssw0rd {config.Database.Name}");
+            shell.Execute("docker", $"compose exec {config.Database.ContainerId} mysql -u {config.Database.Username} -p{config.Database.Password} {config.Database.Name}");
             ConsoleWriter.Success("Database shell closed");
         }
         else if (config.Database.Type == DbType.Postgres)
         {
-            shell.Execute("docker", $"compose exec {config.Database.ContainerId} psql -U root -d {config.Database.Name}");
+            shell.Execute("docker", $"compose exec {config.Database.ContainerId} psql -U {config.Database.Username} -d {config.Database.Name}");
             ConsoleWriter.Success("Database shell closed");
         }
         else if (config.Database.Type == DbType.SqlServer)
         {
-            ConsoleWriter.Warning("You must use Sqlcmd to access database");
-            ConsoleWriter.Warning("For more info:")
-            ConsoleWriter.Warning("https://techcommunity.microsoft.com/t5/sql-server-blog/use-sqlcmd-to-create-and-query-a-sql-server-container-for/ba-p/3859167#:~:text=The%20prerequisite%20to%20use%20sqlcmd,such%20as%20Docker%20or%20Podman.&text=If%20you%20have%20the%20ODBC,sqlcmd%20to%20become%20the%20default.");
+            shell.Execute("docker", $"compose exec {config.Database.ContainerId} /opt/mssql-tools/bin/sqlcmd -S localhost -U {config.Database.Username} -P {config.Database.Password}  -d {config.Database.Name}");
+            ConsoleWriter.Success("Database shell closed");
         }
     }
 }

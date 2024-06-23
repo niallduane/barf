@@ -63,10 +63,8 @@ public class AddServiceSubCommand : Command
     {
         var serviceRegistration = Path.Combine(Directory.GetCurrentDirectory(), $"src/3.Services/{nameSpace}.Services/DependencyRegistration.cs");
         FileUpdater.UpdateContent(serviceRegistration,
-        @"public static void RegisterServices(this IServiceCollection services, IConfiguration config)
-    {",
-        $@"public static void RegisterServices(this IServiceCollection services, IConfiguration config)
-    {{
+        @"// <!-- barf injection token -->",
+        $@"// <!-- barf injection token -->
         services.AddTransient<Domain.Services.{name}s.I{name}Service, {name}s.{name}Service>();
         ");
     }
