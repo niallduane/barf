@@ -42,7 +42,7 @@ public class NewSolutionCommand : Command
             config.Database = new DatabaseConfiguration
             {
                 Type = DbType.Mysql,
-                Name = solutionName.ToLower(),
+                Name = $"{solutionName.ToLower()}db",
                 Username = "root",
                 Password = "P@ssw0rd",
                 ContainerId = $"{solutionName.ToLower()}-db"
@@ -58,7 +58,7 @@ public class NewSolutionCommand : Command
             config.Database = new DatabaseConfiguration
             {
                 Type = DbType.Postgres,
-                Name = solutionName.ToLower(),
+                Name = $"{solutionName.ToLower()}db",
                 Username = "root",
                 Password = "P@ssw0rd",
                 ContainerId = $"{solutionName.ToLower()}-db"

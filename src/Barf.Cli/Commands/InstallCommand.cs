@@ -4,7 +4,7 @@ namespace Barf.Cli.Commands;
 
 public class InstallCommand : Command
 {
-    public InstallCommand() : base("install")
+    public InstallCommand() : base("install", "Installs the barf templates")
     {
         this.SetHandler(Execute);
     }

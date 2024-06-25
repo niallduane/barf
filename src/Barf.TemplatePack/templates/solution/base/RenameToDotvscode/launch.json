@@ -10,9 +10,8 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "/bin/Debug/net8.0/BarfSourceName.Presentation.Api.dll",
+      "program": "${workspaceFolder}/src/4.Presentation/BarfSourceName.Presentation.Api/bin/Debug/net8.0/BarfSourceName.Presentation.Api.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/src/4.Presentation/BarfSourceName.Presentation.Api",
       "stopAtEntry": false,
       // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
       "serverReadyAction": {
@@ -36,9 +35,8 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "/bin/Debug/net8.0/BarfSourceName.Presentation.Api.dll",
+      "program": "${workspaceFolder}/src/4.Presentation/BarfSourceName.Presentation.Api/bin/Debug/net8.0/BarfSourceName.Presentation.Api.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/src/4.Presentation/BarfSourceName.Presentation.Api",
       "stopAtEntry": false,
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development"

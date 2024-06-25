@@ -4,7 +4,7 @@ namespace Barf.Cli.Commands;
 
 public class UpdateDatabaseSubCommand : Command
 {
-    public UpdateDatabaseSubCommand() : base("update")
+    public UpdateDatabaseSubCommand() : base("update", "runs the migrations against the database")
     {
         this.SetHandler(() => Execute());
     }

@@ -7,7 +7,7 @@ namespace Barf.Cli.Commands;
 
 public class RunShellSubCommand : Command
 {
-    public RunShellSubCommand() : base("shell")
+    public RunShellSubCommand() : base("shell", "creates a shell for executing sql commands against the database")
     {
         this.SetHandler(() => Execute());
     }

@@ -4,7 +4,7 @@ namespace Barf.Cli.Commands;
 
 public class UninstallCommand : Command
 {
-    public UninstallCommand() : base("uninstall")
+    public UninstallCommand() : base("uninstall", "uninstalls the barf templates")
     {
         this.SetHandler(Execute);
     }
