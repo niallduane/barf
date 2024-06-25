@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csharp",
+    "editorconfig.editorconfig",
+    "github.vscode-pull-request-github",
+    "kreativ-software.csharpextensions",
+    "foxundermoon.shell-format",
+    "ms-dotnettools.vscodeintellicode-csharp"
+  ]
+}
