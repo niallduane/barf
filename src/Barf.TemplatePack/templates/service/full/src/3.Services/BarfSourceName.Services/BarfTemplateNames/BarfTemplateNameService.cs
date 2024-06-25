@@ -45,10 +45,12 @@ public class BarfTemplateNameService : IBarfTemplateNameService
         return result.ToCreateBarfTemplateNameResponse();
     }
 
-    // public Task<UpdateBarfTemplateNameResponse> UpdateBarfTemplateName(string barftemplatenameId, PatchBodyRequest<UpdateBarfTemplateNameRequest> request)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    public async Task<UpdateBarfTemplateNameResponse> UpdateBarfTemplateName(string barftemplatenameId, PatchRequest<UpdateBarfTemplateNameRequest> request)
+    {
+        var result = await _barftemplatenameRepository.Update(new Guid(barftemplatenameId), request);
+        return result.ToUpdateBarfTemplateNameResponse();
+    }
+
 
     public async Task<UpsertResult<UpsertBarfTemplateNameResponse>> UpsertBarfTemplateName(string barftemplatenameId, UpsertBarfTemplateNameRequest request)
     {
