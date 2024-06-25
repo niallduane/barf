@@ -1,11 +1,10 @@
 using System.CommandLine;
-using System.Diagnostics;
 
 namespace Barf.Cli.Commands;
 
 public class AddMigrationSubCommand : Command
 {
-    public AddMigrationSubCommand() : base("add")
+    public AddMigrationSubCommand() : base("add", "Add new database migration")
     {
         var name = new Argument<string>
             ("name", "Migration name");

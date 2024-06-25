@@ -1,18 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+
+using Barf.Cli.Models;
 
 namespace Barf.Cli;
-
-public class BarfConfiguration
-{
-    [JsonPropertyName("namespace")]
-    public string? Namespace { get; set; }
-    public string? WorkingDirectory { get; set; }
-}
 
 public class ConfigurationLoader
 {
@@ -31,12 +21,27 @@ public class ConfigurationLoader
         string fileContent = File.ReadAllText(filePath);
         Console.WriteLine($"configuration contents: {fileContent}");
 
-        var config = JsonSerializer.Deserialize<BarfConfiguration>(fileContent);
+        var config = Json.Deserialize<BarfConfiguration>(fileContent);
         if (config != null)
         {
             config.WorkingDirectory = currentDirectory;
             return config;
         }
         return null;
+    }
+
+    public static void Update(BarfConfiguration configuration)
+    {
+        string currentDirectory = Directory.GetCurrentDirectory();
+        string filePath = Path.Combine(currentDirectory, ".barf");
+
+        Console.WriteLine($"getting configuration: {filePath}");
+        if (!File.Exists(filePath))
+        {
+            Console.WriteLine("File not found: " + filePath);
+            return;
+        }
+
+        File.WriteAllText(filePath, Json.Serialize(configuration));
     }
 }
