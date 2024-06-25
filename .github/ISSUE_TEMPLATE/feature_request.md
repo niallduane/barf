@@ -19,8 +19,7 @@ A clear and concise description of what you want to happen.
 Add any other context or screenshots about the feature request here.
 
 ## Testing Checklist
-*  Testing steps
+- [ ] Add Testing steps here
 
 _Your tests should normally include:_
-
 __Instructions on how to get into a state to be able to perform tests_

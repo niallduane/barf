@@ -36,3 +36,9 @@ If applicable, add screenshots to help explain your problem.
 
 **Additional context**
 Add any other context about the problem here.
+
+## Testing Checklist
+- [ ] Add Testing steps here
+
+_Your tests should normally include:_
+__Instructions on how to get into a state to be able to perform tests_
