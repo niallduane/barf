@@ -7,7 +7,7 @@
     <Title>Barf.TemplatePack</Title>
     <Authors>Niall Duane</Authors>
     <Description>
-		Templates to use when creating a clean architecture api.
+		Templates to use with the barf CLI
 	</Description>
     <PackageTags>dotnet-new;templates;</PackageTags>
 
@@ -19,24 +19,22 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
-	  <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
     <Compile Remove="**\*" />
-    <!-- <Compile Remove="templates\solution\**" />
-    <Content Remove="templates\solution\**" />
-    <EmbeddedResource Remove="templates\solution\**" />
-    <None Remove="templates\solution\**" /> -->
   </ItemGroup>
 
-	<ItemGroup>
-		<None Include="Readme.md" Pack="true" PackagePath="\" />
+  <ItemGroup>
+		<None Include="../../Readme.md" Pack="true" PackagePath="\" />
+    <None Include="../../LICENSE.txt" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<PropertyGroup>
-		<RepositoryUrl>https://github.com/niallduane</RepositoryUrl>
+		<RepositoryUrl>https://github.com/niallduane/barf</RepositoryUrl>
 	</PropertyGroup>
 
 </Project>

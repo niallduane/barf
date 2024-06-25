@@ -5,11 +5,8 @@ Under the hood, it uses dotnet templates to create the solution.
 
 Every Barf solution contains
 
-* Database setup (Sql Server[Default] or Mysql)
+* Database setup (Sql Server[Default], Mysql Or Postgres)
 * Api project with swagger configuration
-* Worker project for background tasks
-
-The
 
 ## References
 

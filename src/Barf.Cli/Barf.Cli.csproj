@@ -19,8 +19,8 @@
     <Description>CLI tool for creating and using Barf applications.</Description>
     <PackageTags>cli;command;barf</PackageTags>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
-    <RepositoryUrl></RepositoryUrl>
-    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/niallduane/barf</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/niallduane/barf</PackageProjectUrl>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <!-- <PackageIcon>icon.png</PackageIcon> -->
   </PropertyGroup>
@@ -38,8 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-		<None Include="Readme.md" Pack="true" PackagePath="\" />
-    <None Include="LICENSE.txt" Pack="true" PackagePath="\" />
+		<None Include="../../Readme.md" Pack="true" PackagePath="\" />
+    <None Include="../../LICENSE.txt" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>
