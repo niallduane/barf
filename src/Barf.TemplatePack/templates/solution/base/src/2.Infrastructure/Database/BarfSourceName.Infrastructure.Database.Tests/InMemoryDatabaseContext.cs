@@ -20,6 +20,7 @@ public class InMemoryDatabaseContext : DatabaseContext
 
     private void Seed()
     {
+        // <!-- barf injection token -->
         this.SaveChanges();
     }
 }

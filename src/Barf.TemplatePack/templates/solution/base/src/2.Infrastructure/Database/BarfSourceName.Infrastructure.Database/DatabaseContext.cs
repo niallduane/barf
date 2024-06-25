@@ -4,7 +4,7 @@ namespace BarfSourceName.Infrastructure.Database;
 
 public class DatabaseContext : DbContext
 {
-
+    // <!-- barf injection token -->
     public DatabaseContext()
     {
     }

@@ -4,16 +4,16 @@
 
 services:
   barfsourcename-db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    restart: unless-stopped
-    ports:  
-    - '1433:1433' 
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
     environment:
-      MSSQL_DB_NAME: barfsourcenamedb
-      MSSQL_SA_PASSWORD: P@ssw0rd
-      ACCEPT_EULA: Y
+      - POSTGRES_PASSWORD=P@ssw0rd
+      - POSTGRES_USER=root
+      - POSTGRES_DB=barfsourcenamedb
     working_dir: /tmp/scripts
 
-volumes:
-  barfsourcename-db:
-    driver: local
+
+

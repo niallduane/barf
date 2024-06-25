@@ -6,6 +6,6 @@ public static class DependencyRegistration
 {
     public static void RegisterRepositories(this IServiceCollection services, IConfiguration config)
     {
-
+        // <!-- barf injection token -->
     }
 }

@@ -2,9 +2,9 @@ using System.CommandLine;
 
 namespace Barf.Cli.Commands;
 
-public class AddMigrationSubCommand : Command
+public class RevertMigrationSubCommand : Command
 {
-    public AddMigrationSubCommand() : base("add", "Add new database migration")
+    public RevertMigrationSubCommand() : base("revert", "Revert migration on database")
     {
         var name = new Argument<string>
             ("name", "Migration name");
@@ -18,11 +18,11 @@ public class AddMigrationSubCommand : Command
         var config = ConfigurationLoader.LoadBarfFile();
         string ns = (config?.Namespace ?? "barf")!;
 
-        ConsoleWriter.Start("Adding migration");
+        ConsoleWriter.Start("Updating Database");
 
         var shell = new ProcessShell();
-        shell.Execute("dotnet", $"ef migrations add {name}", $"./src/2.Infrastructure/Database/{ns}.Infrastructure.Database");
+        shell.Execute("dotnet", $"ef database update {name}", $"./src/2.Infrastructure/Database/{ns}.Infrastructure.Database");
 
-        ConsoleWriter.Success("migration added");
+        ConsoleWriter.Success("Database Updated");
     }
 }

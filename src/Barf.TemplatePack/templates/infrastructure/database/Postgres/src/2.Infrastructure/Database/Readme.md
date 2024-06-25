@@ -34,7 +34,7 @@ In the database project directory, run the command
 
 To execute sql directly on the mysql docker container, run the following command
 
-`docker compose exec barfsourcename-db mysql -u root -pP@ssw0rd barfsourcenamedb`
+`docker compose exec barfsourcename-db psql -U root -W -d barfsourcenamedb`
 
 Write SQL scripts in the folder `./src/2.Infrastructure/Database/Scripts/Dev`
 and execute them using the command `source {filename}.sql`
