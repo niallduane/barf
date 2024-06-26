@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Niall",
+  "classifications": [
+    "tada events base",
+    "clean architecture"
+  ],
+  "identity": "Tada.events.base",
+  "name": "Tada.events.base",
+  "shortName": "tada-events-base",
+  "sourceName": "TadaTemplateName",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "description": "Creates Repository Items",
+  "preferNameDirectory": false,
+  "symbols": {
+    "nameSpace": {
+      "description": "namespace",
+      "dataType": "string",
+      "type": "parameter",
+      "defaultValue": "",
+      "isRequired": true,
+      "replaces": "TadaSourceName",
+      "fileRename": "TadaSourceName"
+    }
+  }
+}

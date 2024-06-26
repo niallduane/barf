@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Niall",
+  "classifications": [
+    "tada repository",
+    "clean architecture"
+  ],
+  "identity": "Tada.database.repository",
+  "name": "Tada.database.repository",
+  "shortName": "tada-database-repository",
+  "sourceName": "TadaTemplateName",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "description": "Add tada database repository",
+  "preferNameDirectory": false,
+  "symbols": {
+    "nameSpace": {
+      "description": "namespace",
+      "dataType": "string",
+      "type": "parameter",
+      "defaultValue": "",
+      "isRequired": true,
+      "replaces": "TadaSourceName",
+      "fileRename": "TadaSourceName"
+    }
+  }
+}

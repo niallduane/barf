@@ -1,9 +1,9 @@
-# Barf
+# Tada
 
 A CLI that creates a dotnet solution built on clean architecture.
 Under the hood, it uses dotnet templates to create the solution.
 
-Every Barf solution contains
+Every Tada solution contains
 
 * Database setup (Sql Server[Default] or Mysql)
 * Api project with swagger configuration

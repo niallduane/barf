@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/Barf.cli/bin/Debug/net8.0/Barf.cli.dll",
+            "program": "${workspaceFolder}/src/Tada.cli/bin/Debug/net8.0/Tada.cli.dll",
             "args": [
                 "install"
             ],

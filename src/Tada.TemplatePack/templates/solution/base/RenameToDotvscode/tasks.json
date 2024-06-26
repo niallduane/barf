@@ -1,0 +1,179 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "clean solution (remove build artifacts)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                // Ask dotnet build to generate full paths for file names.
+                "/property:GenerateFullPaths=true",
+                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Run with Hot Reload",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/src/4.Presentation/TadaSourceName.Presentation.Api/TadaSourceName.Presentation.Api.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Run tests",
+            "command": "dotnet",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "type": "shell",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "args": [
+                "test",
+                "${workspaceFolder}/TadaSourceName.sln"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Update Database",
+            "type": "shell",
+            "command": "tada db update",
+            "problemMatcher": []
+        },
+        {
+            "label": "Add Database Migration",
+            "type": "shell",
+            "command": "tada db add ${input:dbMigrationName}",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Rollback Database Migration",
+            "type": "shell",
+            "command": "tada db rollback",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Add Service",
+            "type": "shell",
+            "command": "tada add service ${input:serviceName} --type ${input:serviceType}",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Add Infrastructure",
+            "type": "shell",
+            "command": "tada add infrastructure ${input:infraName}",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Add Repository",
+            "type": "shell",
+            "command": "tada add repository ${input:repositoryName}",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Add New Database Entity",
+            "type": "shell",
+            "command": "tada add entity ${input:entityName}",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Revert migration on database",
+            "type": "shell",
+            "command": "tada db revert ${input:dbMigrationName}",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Script database migrations from...",
+            "type": "shell",
+            "command": "tada db script '${input:dbMigrationName}' -o '${workspaceFolder}/scripts/sql/local/${input:dbMigrationName}.sql'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "entityName",
+            "type": "promptString",
+            "description": "Enter the name of the entity"
+        },
+        {
+            "id": "dbMigrationName",
+            "type": "promptString",
+            "description": "Enter the name of the migration"
+        },
+        {
+            "id": "serviceName",
+            "type": "promptString",
+            "description": "Enter the name of the new service"
+        },
+        {
+            "id": "infraName",
+            "type": "promptString",
+            "description": "Enter the name of the new infrastructure project"
+        },
+        {
+            "id": "repositoryName",
+            "type": "promptString",
+            "description": "Enter the name of the new repository"
+        },
+        {
+            "id": "serviceType",
+            "type": "pickString",
+            "description": "service template",
+            "options": [
+                {
+                    "label": "Basic",
+                    "value": "basic"
+                },
+                {
+                    "label": "Full (with entity and repository pattern)",
+                    "value": "full"
+                }
+            ],
+            "default": "basic"
+        }
+    ]
+}

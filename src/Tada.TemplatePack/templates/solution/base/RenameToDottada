@@ -1,0 +1,8 @@
+{
+    "namespace": "TadaSourceName",
+    "database": {
+        "type": "SqlServer",
+        "name": "tadasourcenamedb",
+        "containerId": "tadasourcename-db"
+    }
+}

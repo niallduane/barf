@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Niall",
+  "classifications": [
+    "Tada service domain",
+    "clean architecture"
+  ],
+  "identity": "Tada.service.controller",
+  "name": "Tada.service.controller",
+  "shortName": "tada-service-controller",
+  "sourceName": "TadaTemplateName",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "description": "Creates a Service Items in an Api Solution",
+  "preferNameDirectory": false,
+  "symbols": {
+    "nameSpace": {
+      "description": "service namespace",
+      "dataType": "string",
+      "type": "parameter",
+      "defaultValue": "tada",
+      "isRequired": true,
+      "replaces": "TadaSourceName",
+      "fileRename": "TadaSourceName"
+    }
+  }
+}

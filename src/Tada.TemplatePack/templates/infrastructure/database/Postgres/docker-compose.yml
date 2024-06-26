@@ -1,0 +1,19 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+# To Start, Run command `docker-compose up -d --build`
+
+services:
+  tadasourcename-db:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=P@ssw0rd
+      - POSTGRES_USER=root
+      - POSTGRES_DB=tadasourcenamedb
+    working_dir: /tmp/scripts
+
+
+

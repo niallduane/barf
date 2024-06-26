@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Niall",
+  "classifications": [
+    "add postgres",
+    "clean architecture"
+  ],
+  "identity": "Tada.database.postgres",
+  "name": "Tada.database.postgres",
+  "shortName": "tada-database-postgres",
+  "sourceName": "TadaSourceName",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "description": "Add postgres to tada solution",
+  "preferNameDirectory": false
+}

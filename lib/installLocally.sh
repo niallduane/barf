@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# dotnet nuget remove source "barf_project"
-# dotnet nuget add source --name "barf_project" "C:\code\personal\barf\output"
+dotnet nuget remove source "tada_project"
+dotnet nuget add source --name "tada_project" "C:\Users\n_dua\source\Tada\output"
 
 dotnet pack
-dotnet tool uninstall Barf --global
-dotnet tool install Barf --global
+dotnet tool uninstall Tada --global
+dotnet tool install Tada --global
 
-dotnet new uninstall Barf.TemplatePack
-dotnet new install ./output/Barf.TemplatePack.1.0.0.nupkg --force
+dotnet new uninstall Tada.TemplatePack
+dotnet new install ./output/Tada.TemplatePack.1.0.0.nupkg --force
