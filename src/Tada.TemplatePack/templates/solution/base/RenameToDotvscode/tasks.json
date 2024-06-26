@@ -169,6 +169,10 @@
                     "value": "basic"
                 },
                 {
+                    "label": "Service with repository pattern only",
+                    "value": "excludeentity"
+                },
+                {
                     "label": "Full (with entity and repository pattern)",
                     "value": "full"
                 }

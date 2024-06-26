@@ -4,7 +4,7 @@ namespace Tada.Cli.Commands;
 
 public class InstallCommand : Command
 {
-    public InstallCommand() : base("install")
+    public InstallCommand() : base("install", "Installs the tada templates")
     {
         this.SetHandler(Execute);
     }

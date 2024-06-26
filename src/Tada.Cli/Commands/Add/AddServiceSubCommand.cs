@@ -8,8 +8,9 @@ public class AddServiceSubCommand : Command
 {
     public enum ServiceTemplateTypes
     {
-        Basic = 0,
-        Full = 2
+        Basic = 1,
+        ExcludeEntity = 2,
+        Full = 3
     }
     public AddServiceSubCommand() : base("service", "add service code")
     {
@@ -40,6 +41,15 @@ public class AddServiceSubCommand : Command
         {
             shell.Execute("dotnet", $"new tada-database-entity -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
 
+            shell.Execute("dotnet", $"new tada-database-repository -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
+
+            shell.Execute("dotnet", $"new tada-service-full -n {name} --nameSpace {ns}");
+
+            AddEntitySubCommand.UpdateContent(name, ns);
+            AddRepositorySubCommand.UpdateContent(name, ns);
+        }
+        else if (serviceType == ServiceTemplateTypes.ExcludeEntity )
+        {
             shell.Execute("dotnet", $"new tada-database-repository -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
 
             shell.Execute("dotnet", $"new tada-service-full -n {name} --nameSpace {ns}");

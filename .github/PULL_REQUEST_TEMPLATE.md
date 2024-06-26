@@ -1,1 +1,2 @@
-- [] I have selected the correct target branch to merge to
+- [ ] I have selected the correct target branch to merge to
+- [ ] I have updated the changelog
