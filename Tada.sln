@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{04490D51-E428-48F9-B1C9-ECF4FFC3D1B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tada.TemplatePack", "src\Tada.TemplatePack\Tada.TemplatePack.csproj", "{EE1F7687-CBEA-4382-9BBF-03313060F4A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tada.Cli", "src\Tada.Cli\Tada.Cli.csproj", "{221C02DE-DBA5-4994-B234-A7F541CD9E3A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE1F7687-CBEA-4382-9BBF-03313060F4A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE1F7687-CBEA-4382-9BBF-03313060F4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE1F7687-CBEA-4382-9BBF-03313060F4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE1F7687-CBEA-4382-9BBF-03313060F4A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{221C02DE-DBA5-4994-B234-A7F541CD9E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{221C02DE-DBA5-4994-B234-A7F541CD9E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{221C02DE-DBA5-4994-B234-A7F541CD9E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{221C02DE-DBA5-4994-B234-A7F541CD9E3A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EE1F7687-CBEA-4382-9BBF-03313060F4A3} = {04490D51-E428-48F9-B1C9-ECF4FFC3D1B3}
+		{221C02DE-DBA5-4994-B234-A7F541CD9E3A} = {04490D51-E428-48F9-B1C9-ECF4FFC3D1B3}
+	EndGlobalSection
+EndGlobal

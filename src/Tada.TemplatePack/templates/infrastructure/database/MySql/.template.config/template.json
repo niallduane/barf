@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Niall",
+  "classifications": [
+    "add mysql",
+    "clean architecture"
+  ],
+  "identity": "Tada.database.mysql",
+  "name": "Tada.database.MySql",
+  "shortName": "tada-database-mysql",
+  "sourceName": "TadaSourceName",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "description": "Add mysql",
+  "preferNameDirectory": false
+}

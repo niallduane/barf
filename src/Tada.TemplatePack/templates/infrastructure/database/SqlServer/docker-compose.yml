@@ -1,0 +1,19 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+# To Start, Run command `docker-compose up -d --build`
+
+services:
+  tadasourcename-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
+    ports:  
+    - '1433:1433' 
+    environment:
+      MSSQL_DB_NAME: tadasourcenamedb
+      MSSQL_SA_PASSWORD: P@ssw0rd
+      ACCEPT_EULA: Y
+    working_dir: /tmp/scripts
+
+volumes:
+  tadasourcename-db:
+    driver: local

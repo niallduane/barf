@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <PackAsTool>true</PackAsTool>
+
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>tada</ToolCommandName>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageId>Tada</PackageId>
+    <PackageOutputPath>../../output</PackageOutputPath>
+
+    <Title>Tada CLI</Title>
+    <Authors>Niall Duane</Authors>
+    <Description>CLI tool for creating and using Tada applications.</Description>
+    <PackageTags>cli;command;tada</PackageTags>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/niallduane/tada</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/niallduane/tada</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <!-- <PackageIcon>icon.png</PackageIcon> -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.7.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\*.ps1">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+		<None Include="../../Readme.md" Pack="true" PackagePath="\" />
+    <None Include="../../LICENSE.txt" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+</Project>
