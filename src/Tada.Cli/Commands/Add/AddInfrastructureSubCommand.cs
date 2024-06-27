@@ -33,10 +33,21 @@ public class AddInfrastructureSubCommand : Command
 
         shell.DeleteFileInSubDirectories("Class1.cs");
         shell.DeleteFileInSubDirectories("UnitTest1.cs");
-        shell.Execute("dotnet", "new tada-infra -n \"{name}\" --nameSpace \"{ns}\"");
 
+        AddInfrastructureSubCommand.UpdateContent(name, ns);
         shell.DotnetFormat();
 
         ConsoleWriter.Success("tada infrastructure added");
+    }
+
+    public static void UpdateContent(string name, string nameSpace)
+    {
+        var serviceRegistration = Path.Combine(Directory.GetCurrentDirectory(), $"src/4.Presentation/{nameSpace}.Presentation.Api/Startup/DependencyRegistration.cs");
+        FileUpdater.AddContentToBeginningOfFile(serviceRegistration, $"using {nameSpace}.Infrastructure.{name};");
+        FileUpdater.UpdateContent(serviceRegistration,
+        @"// <!-- tada infrastructure injection token -->",
+        $@"// <!-- tada infrastructure injection token -->
+        services.Configure{name}(config);
+        ");
     }
 }

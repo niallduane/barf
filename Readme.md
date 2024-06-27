@@ -10,9 +10,9 @@ Every Tada solution contains
 
 ## Prerequisites
 
-* >= DOTNET 8
-* VS Code
-* Docker
+* [DOTNET](https://dotnet.microsoft.com/en-us/download/dotnet)
+* [VS Code](https://code.visualstudio.com/download)
+* [Docker](https://www.docker.com/products/docker-desktop/)
 
 ## Quick Start
 

@@ -22,6 +22,7 @@ public class AddRepositorySubCommand : Command
         ConsoleWriter.Start("Adding tada repository");
 
         var shell = new ProcessShell();
+        shell.Execute("dotnet", "new install Tada.TemplatePack");
         shell.Execute("dotnet", $"new tada-database-repository -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
 
         UpdateContent(name, ns);
