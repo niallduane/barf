@@ -21,6 +21,7 @@ public class AddEntitySubCommand : Command
         ConsoleWriter.Start("Updating Database");
 
         var shell = new ProcessShell();
+        shell.Execute("dotnet", "new install Tada.TemplatePack");
         shell.Execute("dotnet", $"new tada-database-entity -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
 
         UpdateContent(name, ns);

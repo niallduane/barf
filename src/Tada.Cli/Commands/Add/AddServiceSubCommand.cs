@@ -34,6 +34,7 @@ public class AddServiceSubCommand : Command
         ConsoleWriter.Start("Adding tada service");
 
         var shell = new ProcessShell();
+        shell.Execute("dotnet", "new install Tada.TemplatePack");
         shell.Execute("dotnet", $"new tada-domain-service -n {name} --nameSpace {ns}");
         shell.Execute("dotnet", $"new tada-service-controller -n {name} --nameSpace {ns}");
 

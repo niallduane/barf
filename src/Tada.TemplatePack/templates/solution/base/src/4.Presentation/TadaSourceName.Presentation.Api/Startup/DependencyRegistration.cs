@@ -38,5 +38,6 @@ public static class DependencyRegistration
     {
         services.ConfigureDatabase(config);
         services.RegisterRepositories(config);
+        // <!-- tada infrastructure injection token -->
     }
 }

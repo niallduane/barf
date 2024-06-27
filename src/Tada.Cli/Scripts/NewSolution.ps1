@@ -1,3 +1,4 @@
+dotnet new install Tada.TemplatePack;
 dotnet new editorconfig;
 dotnet new gitignore;
 dotnet new tool-manifest;
