@@ -6,6 +6,7 @@
       "github.vscode-pull-request-github",
       "kreativ-software.csharpextensions",
       "foxundermoon.shell-format",
-      "ms-dotnettools.vscodeintellicode-csharp"
+      "ms-dotnettools.vscodeintellicode-csharp",
+      "github.vscode-github-actions"
     ]
   }
