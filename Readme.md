@@ -56,4 +56,5 @@ Every Tada solution contains
 
 ## References
 
+* [Dotnet custom templates](https://learn.microsoft.com/en-us/dotnet/core/tools/custom-templates)
 * [Authenticating to github packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-nuget-registry#authenticating-to-github-packages)

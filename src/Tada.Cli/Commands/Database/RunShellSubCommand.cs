@@ -18,6 +18,7 @@ public class RunShellSubCommand : Command
         ConsoleWriter.Start("Starting database shell");
 
         var shell = new ProcessShell();
+        shell.Execute("docker", "compose up -d");
         if (config?.Database?.Type == DbType.Mysql)
         {
             shell.Execute("docker", $"compose exec {config.Database.ContainerId} mysql -u {config.Database.Username} -p{config.Database.Password} {config.Database.Name}");
