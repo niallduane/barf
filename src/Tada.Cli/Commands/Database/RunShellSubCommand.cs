@@ -18,17 +18,18 @@ public class RunShellSubCommand : Command
         ConsoleWriter.Start("Starting database shell");
 
         var shell = new ProcessShell();
-        if (config?.Database?.Type == DbType.Mysql)
+        shell.Execute("docker", "compose up -d");
+        if (config?.Database?.Type == DbTypes.Mysql)
         {
             shell.Execute("docker", $"compose exec {config.Database.ContainerId} mysql -u {config.Database.Username} -p{config.Database.Password} {config.Database.Name}");
             ConsoleWriter.Success("Database shell closed");
         }
-        else if (config?.Database?.Type == DbType.Postgres)
+        else if (config?.Database?.Type == DbTypes.Postgres)
         {
             shell.Execute("docker", $"compose exec {config.Database.ContainerId} psql -U {config.Database.Username} -d {config.Database.Name}");
             ConsoleWriter.Success("Database shell closed");
         }
-        else if (config?.Database?.Type == DbType.SqlServer)
+        else if (config?.Database?.Type == DbTypes.SqlServer)
         {
             shell.Execute("docker", $"compose exec {config.Database.ContainerId} /opt/mssql-tools/bin/sqlcmd -S localhost -U {config.Database.Username} -P {config.Database.Password}  -d {config.Database.Name}");
             ConsoleWriter.Success("Database shell closed");

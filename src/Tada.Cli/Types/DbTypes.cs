@@ -1,6 +1,6 @@
 namespace Tada.Cli.Types;
 
-public enum DbType
+public enum DbTypes
 {
     Mysql = 0,
     SqlServer = 1,

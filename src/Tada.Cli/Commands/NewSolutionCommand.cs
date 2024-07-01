@@ -15,7 +15,7 @@ public class NewSolutionCommand : Command
         var name = new Argument<string>
             ("name", "solution name");
 
-        var dbType = new Option<DbType>("--dbtype", () => DbType.SqlServer, "Select the db type");
+        var dbType = new Option<DbTypes>("--dbtype", () => DbTypes.SqlServer, "Select the db type");
 
         this.Add(name);
         this.Add(dbType);
@@ -23,7 +23,7 @@ public class NewSolutionCommand : Command
         this.SetHandler((nameValue, dbTypeValue) => Execute(nameValue, dbTypeValue), name, dbType);
     }
 
-    public void Execute(string solutionName, DbType dbType)
+    public void Execute(string solutionName, DbTypes dbType)
     {
         ConsoleWriter.Start("Creating Project");
         if (string.IsNullOrEmpty(solutionName))
@@ -37,11 +37,11 @@ public class NewSolutionCommand : Command
 
         var config = ConfigurationLoader.LoadTadaFile()!;
 
-        if (dbType == DbType.Mysql)
+        if (dbType == DbTypes.Mysql)
         {
             config.Database = new DatabaseConfiguration
             {
-                Type = DbType.Mysql,
+                Type = DbTypes.Mysql,
                 Name = $"{solutionName.ToLower()}db",
                 Username = "root",
                 Password = "P@ssw0rd",
@@ -53,11 +53,11 @@ public class NewSolutionCommand : Command
 
             shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"server=localhost;port=3308;database={config.Database.Name}db;uid={config.Database.Username};pwd={config.Database.Password};ConvertZeroDateTime=True\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
         }
-        else if (dbType == DbType.Postgres)
+        else if (dbType == DbTypes.Postgres)
         {
             config.Database = new DatabaseConfiguration
             {
-                Type = DbType.Postgres,
+                Type = DbTypes.Postgres,
                 Name = $"{solutionName.ToLower()}db",
                 Username = "root",
                 Password = "P@ssw0rd",
@@ -69,11 +69,11 @@ public class NewSolutionCommand : Command
 
             shell.Execute("dotnet", $"user-secrets set \"ConnectionStrings:Database\" \"Server=localhost;Port=5432;Database={config.Database.Name}db;Username={config.Database.Username};Password={config.Database.Password};\" -p \"./src/2.Infrastructure/Database/{solutionName}.Infrastructure.Database/{solutionName}.Infrastructure.Database.csproj\"");
         }
-        else if (dbType == DbType.SqlServer)
+        else if (dbType == DbTypes.SqlServer)
         {
             config.Database = new DatabaseConfiguration
             {
-                Type = DbType.SqlServer,
+                Type = DbTypes.SqlServer,
                 Name = solutionName,
                 Username = "sa",
                 Password = "P@ssw0rd",

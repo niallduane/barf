@@ -7,7 +7,7 @@ namespace Tada.Cli.Models;
 public class DatabaseConfiguration
 {
     [JsonPropertyName("type")]
-    public DbType Type { get; set; }
+    public DbTypes Type { get; set; }
     [JsonPropertyName("name")]
     public string? Name { get; set; }
     [JsonPropertyName("containerId")]

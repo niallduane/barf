@@ -24,6 +24,26 @@ It uses certain terminology to achieve this architecture.
    contains the UI interface to the solution. This can be anything like a
    Website, Console App, Windows App or simply an Api Service.
 
+## Deployment
+
+To create a new deployment package, first add the deployment targets appsettings to
+
+- The database infrastructure
+- The presentation api
+
+alternatively, you can use env settings on deployment target.
+
+Then execute the following command:
+
+```
+tada app package
+```
+
+This command creates (default location ./publish):
+
+- A dbmigrations executable file based on EFbundle.
+- The app build assets
+
 ## References
 
 ### Solution Resources
@@ -32,7 +52,7 @@ It uses certain terminology to achieve this architecture.
 
 ### Additional Resources
 
-- [Tada](https://github.com/niallduane/)
+- [Tada](https://github.com/niallduane/tada)
 - [Set up https for docker](https://github.com/dotnet/dotnet-docker/blob/main/samples/run-aspnetcore-https-development.md)
 - [Localization](https://github.com/AlexTeixeira/Askmethat-Aspnet-JsonLocalizer)
 - [EFBundles](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli#bundles)
