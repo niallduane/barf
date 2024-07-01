@@ -29,13 +29,11 @@
         },
         {
             "label": "Run with Hot Reload",
-            "command": "dotnet",
+            "command": "tada",
             "type": "process",
             "args": [
-                "watch",
-                "run",
-                "--project",
-                "${workspaceFolder}/src/4.Presentation/TadaSourceName.Presentation.Api/TadaSourceName.Presentation.Api.csproj"
+                "app",
+                "serve"
             ],
             "problemMatcher": "$msCompile"
         },
