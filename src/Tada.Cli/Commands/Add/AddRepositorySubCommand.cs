@@ -19,7 +19,7 @@ public class AddRepositorySubCommand : Command
         var config = ConfigurationLoader.LoadTadaFile();
         var ns = config?.Namespace ?? "tada";
 
-        ConsoleWriter.Start("Adding tada repository");
+        ConsoleWriter.Start($"Adding {name} repository");
 
         var shell = new ProcessShell();
         shell.Execute("dotnet", "new install Tada.TemplatePack");
@@ -29,7 +29,7 @@ public class AddRepositorySubCommand : Command
 
         shell.DotnetFormat();
 
-        ConsoleWriter.Success("tada repository added");
+        ConsoleWriter.Success($"{name} repository added");
     }
 
     public static void UpdateContent(string name, string nameSpace)
