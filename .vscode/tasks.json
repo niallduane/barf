@@ -24,6 +24,18 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "clean solution",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/"
+            },
+            "presentation": {
+                "echo": true
+            },
+            "command": "bash  ./lib/clean.sh",
+            "problemMatcher": []
+        },
+        {
             "label": "Install locally",
             "type": "shell",
             "options": {
