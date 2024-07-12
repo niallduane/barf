@@ -1,4 +1,5 @@
 ﻿using TadaSourceName.Domain.Core;
+using TadaSourceName.Domain.Core.Extensions;
 using TadaSourceName.Domain.Services.TadaTemplateNames.Models;
 using TadaSourceName.Infrastructure.Database.Entities;
 
