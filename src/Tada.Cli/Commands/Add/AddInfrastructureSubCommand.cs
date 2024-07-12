@@ -23,7 +23,7 @@ public class AddInfrastructureSubCommand : Command
         var ns = config?.Namespace ?? "tada";
 
 
-        ConsoleWriter.Start("Adding tada infrastructure");
+        ConsoleWriter.Start($"Adding {name} infrastructure");
 
         var shell = new ProcessShell();
 
@@ -37,7 +37,7 @@ public class AddInfrastructureSubCommand : Command
         AddInfrastructureSubCommand.UpdateContent(name, ns);
         shell.DotnetFormat();
 
-        ConsoleWriter.Success("tada infrastructure added");
+        ConsoleWriter.Success($"{name} infrastructure added");
     }
 
     public static void UpdateContent(string name, string nameSpace)

@@ -31,7 +31,7 @@ public class AddServiceSubCommand : Command
         var ns = config?.Namespace ?? "tada";
 
 
-        ConsoleWriter.Start("Adding tada service");
+        ConsoleWriter.Start($"Adding {name} service");
 
         var shell = new ProcessShell();
         shell.Execute("dotnet", "new install Tada.TemplatePack");
@@ -67,7 +67,7 @@ public class AddServiceSubCommand : Command
 
         shell.DotnetFormat();
 
-        ConsoleWriter.Success("tada service added");
+        ConsoleWriter.Success($"{name} service added");
     }
 
     public static void UpdateContent(string name, string nameSpace)

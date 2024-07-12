@@ -1,4 +1,6 @@
-﻿using TadaSourceName.Domain.Services.TadaTemplateNames.Models;
+﻿using TadaSourceName.Domain.Core;
+using TadaSourceName.Domain.Core.Extensions;
+using TadaSourceName.Domain.Services.TadaTemplateNames.Models;
 using TadaSourceName.Infrastructure.Database.Entities;
 
 namespace TadaSourceName.Services.TadaTemplateNames.Mappings;
@@ -19,6 +21,22 @@ internal static class DbEntityMapping
         {
 
         };
+    }
+
+    public static Dictionary<string, object?> ToEntityProperties(this UpsertTadaTemplateNameRequest obj)
+    {
+        var props = Json
+            .ToDictionary(obj)
+            .MapToObjectProperties<TadaTemplateName>();
+            
+        // add/remove custom mappings here
+        return props;
+    }
+    public static Dictionary<string, object?> ToEntityProperties(this PatchRequest<UpdateTadaTemplateNameRequest> obj)
+    {
+        var props = obj.MapToObjectProperties<TadaTemplateName>();
+        // add/remove custom mappings here
+        return props;
     }
 
     public static CreateTadaTemplateNameResponse ToCreateTadaTemplateNameResponse(this TadaTemplateName obj)

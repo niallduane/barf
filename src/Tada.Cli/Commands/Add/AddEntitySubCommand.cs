@@ -18,7 +18,7 @@ public class AddEntitySubCommand : Command
         var config = ConfigurationLoader.LoadTadaFile();
         string ns = (config?.Namespace ?? "tada")!;
 
-        ConsoleWriter.Start("Updating Database");
+        ConsoleWriter.Start($"Adding {name} entity");
 
         var shell = new ProcessShell();
         shell.Execute("dotnet", "new install Tada.TemplatePack");
@@ -28,7 +28,7 @@ public class AddEntitySubCommand : Command
 
         shell.DotnetFormat();
 
-        ConsoleWriter.Success("Database Updated");
+        ConsoleWriter.Success($"{name} entity added");
     }
 
     public static void UpdateContent(string name, string nameSpace)

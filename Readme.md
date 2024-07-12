@@ -1,5 +1,7 @@
 # Tada
 
+![Tada workflow](https://github.com/niallduane/tada/actions/workflows/buildAndPublish.yml/badge.svg)
+
 A CLI that creates a dotnet solution built on clean architecture.
 Under the hood, it uses dotnet templates to create the solution.
 
