@@ -114,7 +114,7 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<ExceptionHandlerFilter>();
     options.Filters.Add<ModelStateFilter>();
 
-    options.ModelBinderProviders.Add(new RequestPatchBinderProvider());
+    options.ModelBinderProviders.Insert(0, new RequestPatchBinderProvider());
 }).AddJsonOptions(options => Json.SetOptions(options.JsonSerializerOptions));
 
 builder.Services.RegisterAuthentication(builder.Configuration);

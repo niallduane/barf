@@ -47,7 +47,7 @@ public class TadaTemplateNameService : ITadaTemplateNameService
 
     public async Task<UpdateTadaTemplateNameResponse> UpdateTadaTemplateName(string tadatemplatenameId, PatchRequest<UpdateTadaTemplateNameRequest> request)
     {
-        var result = await _tadatemplatenameRepository.Update(new Guid(tadatemplatenameId), request);
+        var result = await _tadatemplatenameRepository.Update(new Guid(tadatemplatenameId), request.ToEntityProperties());
         return result.ToUpdateTadaTemplateNameResponse();
     }
 
@@ -61,7 +61,8 @@ public class TadaTemplateNameService : ITadaTemplateNameService
             return new UpsertResult<UpsertTadaTemplateNameResponse>(result.ToUpsertTadaTemplateNameResponse(), false);
         }
 
-        throw new NotImplementedException();
+        var updateResult = await _tadatemplatenameRepository.Update(new Guid(tadatemplatenameId), request.ToEntityProperties());
+        return new UpsertResult<UpsertTadaTemplateNameResponse>(updateResult.ToUpsertTadaTemplateNameResponse(), true);
     }
 
     public async Task<DeleteTadaTemplateNameResponse> DeleteTadaTemplateName(string tadatemplatenameId)

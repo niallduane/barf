@@ -62,8 +62,10 @@ public class RequestPatchBinder : IModelBinder
         {
             requestBody = await reader.ReadToEndAsync();
         }
+        var result = Json.Deserialize(requestBody, bindingContext.ModelMetadata.ModelType);
+
         Type type = bindingContext.ModelMetadata.ModelType.GetGenericArguments()[0];
-        var result = Json.Deserialize(requestBody, type);
+        var model = Json.Deserialize(requestBody, type);
 
         bindingContext.Result = ModelBindingResult.Success(result);
     }
@@ -79,7 +81,11 @@ public class RequestPatchBinderProvider : IModelBinderProvider
             throw new ArgumentNullException(nameof(context));
         }
 
-        return new RequestPatchBinder();
+        if (context.BindingInfo.BindingSource == BindingSource.Body)
+        {
+            return new RequestPatchBinder();
+        }
+        return null;
     }
 }
 

@@ -106,11 +106,16 @@ public class TadaTemplateNameController : HateoasController
 
     [ProducesResponseType(typeof(ApiResponse<UpdateTadaTemplateNameResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<ApiResponse<UpdateTadaTemplateNameResponse>> UpdateTadaTemplateName([FromRoute] string id, [FromRequestPatch] PatchRequest<UpdateTadaTemplateNameRequest> body)
+    public async Task<IActionResult> UpdateTadaTemplateName([FromRoute] string id, [FromRequestPatch] PatchRequest<UpdateTadaTemplateNameRequest> body)
     {
+        if (!this.TryValidateModel(body.Model!))
+        {
+            return ValidationProblem();
+        }
+        
         var item = await _tadatemplatenameService.UpdateTadaTemplateName(id, body);
         ApplyLinks(item);
-        return new ApiResponse<UpdateTadaTemplateNameResponse>(StatusCodes.Status200OK, item);
+        return Ok(new ApiResponse<UpdateTadaTemplateNameResponse>(StatusCodes.Status200OK, item));
     }
 
     /// <summary>
