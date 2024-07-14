@@ -24,6 +24,15 @@ public class TadaTemplateNameServiceFixture
                 return tadatemplatename;
             });
 
+        mockTadaTemplateNameRepository.Setup(x => x.Update(It.IsAny<Guid>(), It.IsAny<Dictionary<string, object?>>()))
+            .ReturnsAsync((Guid id, Dictionary<string, object?> newValues) =>
+            {
+                return new TadaTemplateName
+                {
+                    TadaTemplateNameId = id
+                };
+            });
+
         mockTadaTemplateNameRepository.Setup(x => x.GetTadaTemplateName(It.IsAny<Guid>()))
             .ReturnsAsync((Guid tadatemplatenameId) =>
             {
