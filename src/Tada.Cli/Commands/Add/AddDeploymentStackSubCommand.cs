@@ -29,7 +29,6 @@ public class AddDeploymentStackSubCommand : Command
         shell.Execute(Assembly.GetExecutingAssembly().GetResourceText("Scripts.AddDeploymentStack.ps1")
             .Replace("$SOLUTION_NAME", ns));
 
-        shell.DeleteFileInSubDirectories("Program.cs");
         
         var workingDirectory = $"./src/2.Infrastructure/DeploymentStack/{ns}.Infrastructure.DeploymentStack/";
         if (stackType == StackTypes.Azure)
