@@ -9,6 +9,8 @@ namespace Tada.Cli.Models;
 
 public class AppConfiguration
 {
+    [JsonPropertyName("stack")]
+    public StackTypes? Stack { get; set; }
     [JsonPropertyName("package")]
     public PackageConfiguration Package {get;set;} = new();
 }

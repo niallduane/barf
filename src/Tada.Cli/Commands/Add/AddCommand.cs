@@ -10,5 +10,6 @@ public class AddCommand : Command
         this.AddCommand(new AddInfrastructureSubCommand());
         this.AddCommand(new AddRepositorySubCommand());
         this.AddCommand(new AddServiceSubCommand());
+        this.AddCommand(new AddDeploymentStackSubCommand());
     }
 }

@@ -1,0 +1,10 @@
+name: TadaSourceName
+runtime: dotnet
+description: Pulumi deployment stack for TadaSourceName
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: aws-csharp
+  TadaSourceName:sqlAdminPassword: $guid1$
+
+
