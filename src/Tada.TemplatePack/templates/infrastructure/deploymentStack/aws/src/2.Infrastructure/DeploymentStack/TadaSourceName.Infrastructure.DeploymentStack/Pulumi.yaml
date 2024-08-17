@@ -4,7 +4,4 @@ description: Pulumi deployment stack for TadaSourceName
 config:
   pulumi:tags:
     value:
-      pulumi:template: azure-csharp
-  TadaSourceName:sqlAdminPassword: $guid1$
-
-
+      pulumi:template: aws-csharp

@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Niall",
+  "classifications": [
+    "tada aws deployment stack",
+    "clean architecture"
+  ],
+  "identity": "Tada.deploymentstack.aws",
+  "name": "Tada.deploymentstack.aws",
+  "shortName": "tada-stack-aws",
+  "sourceName": "TadaTemplateName",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "description": "Creates Repository Items",
+  "preferNameDirectory": false,
+  "symbols": {
+    "nameSpace": {
+      "description": "namespace",
+      "dataType": "string",
+      "type": "parameter",
+      "defaultValue": "",
+      "isRequired": true,
+      "replaces": "TadaSourceName",
+      "fileRename": "TadaSourceName"
+    }
+  }
+}

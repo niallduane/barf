@@ -35,7 +35,7 @@ public class AddDeploymentStackSubCommand : Command
         {
             var azureScript = $@"
 dotnet add ""./src/2.Infrastructure/DeploymentStack/{ns}.Infrastructure.DeploymentStack/{ns}.Infrastructure.DeploymentStack.csproj"" package Pulumi.AzureNative;
-dotnet new tada-stack-azure --nameSpace {ns};
+dotnet new tada-stack-azure --nameSpace {ns} --force;
             ";
             shell.Execute(azureScript);
             config.App.Stack = StackTypes.Azure;
@@ -44,7 +44,7 @@ dotnet new tada-stack-azure --nameSpace {ns};
         {
             var awsScript = $@"
 dotnet add ""./src/2.Infrastructure/DeploymentStack/{ns}.Infrastructure.DeploymentStack/{ns}.Infrastructure.DeploymentStack.csproj"" package Pulumi.Aws;
-dotnet new tada-stack-aws --nameSpace {ns};
+dotnet new tada-stack-aws --nameSpace {ns} --force;
             ";
             shell.Execute(awsScript);
             config.App.Stack = StackTypes.AWS;
