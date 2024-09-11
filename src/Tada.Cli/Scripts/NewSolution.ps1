@@ -7,6 +7,7 @@ dotnet new globaljson --roll-forward feature;
 dotnet tool install swashbuckle.aspnetcore.cli;
 dotnet tool install dotnet-ef;
 dotnet tool install dotnet-format;
+dotnet tool install Tada;
 
 dotnet new sln -n "$SOLUTION_NAME";
 

@@ -9,5 +9,7 @@ public class DBCommand : Command
         this.AddCommand(new AddMigrationSubCommand());
         this.AddCommand(new UpdateDatabaseSubCommand());
         this.AddCommand(new RunShellSubCommand());
+        this.AddCommand(new RevertMigrationSubCommand());
+        this.AddCommand(new RemoveMigrationSubCommand());
     }
 }
