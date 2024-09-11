@@ -1,0 +1,30 @@
+name: "Build"
+description: ""
+inputs:
+  version:
+    description: 'Package version'
+    required: true
+    default: '0.0.1'
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: "8.0.x"
+
+    - name: Restore dependencies
+      run: dotnet tool restore
+
+    - name: Pack
+      run: tada app package
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.version }}
+        if-no-files-found: error
+        retention-days: 7
+        path: publish

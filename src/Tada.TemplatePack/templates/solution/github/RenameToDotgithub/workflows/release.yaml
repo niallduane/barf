@@ -1,0 +1,32 @@
+name: Release App
+
+on:
+  release:
+    types:
+      - published # Run the workflow when a new GitHub release is published
+
+env:
+  VERSION: 0.0.1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build and Test
+        uses: ./.github/actions/build.yaml
+
+      - uses: actions/checkout@v3
+      - name: Set Version Variable
+        if: ${{ github.ref_type == 'tag' }}
+        env:
+          TAG: ${{ github.ref_name }}
+        run: echo "VERSION=${TAG#v}" >> $GITHUB_ENV
+
+      - name: Build and Test
+        uses: ./.github/actions/pack.yaml
+        with:
+          version: $VERSION
+
+
+      #TODO Add steps for your release process i.e. deploy to azure

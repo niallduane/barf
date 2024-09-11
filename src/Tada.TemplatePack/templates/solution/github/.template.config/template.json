@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Niall",
+  "classifications": [
+    "Tada solution",
+    "clean architecture"
+  ],
+  "description": "Creates dotnet Api Solution using a clean architecture",
+  "identity": "Tada.solution.github",
+  "name": "Tada.solution.github",
+  "preferNameDirectory": true,
+  "shortName": "tada-sln-github",
+  "sourceName": "TadaTemplateName",
+  "symbols": {
+    "renameFile": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": {
+        "value": "."
+      },
+      "fileRename": "RenameToDot"
+    }
+  },
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "postActions": []
+}
