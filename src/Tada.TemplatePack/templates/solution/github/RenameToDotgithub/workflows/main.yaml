@@ -1,0 +1,14 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build and Test
+        uses: ./.github/actions/build.yaml

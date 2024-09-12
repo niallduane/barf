@@ -16,4 +16,22 @@ services:
     working_dir: /tmp/scripts
 
 
+  tadasourcename-pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres@postgresql.org
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+    ports:
+      - "6001:80"
+    volumes:
+      - "./pgadmin.json:/pgadmin4/servers.json"
+    entrypoint:
+      - "/bin/sh"
+      - "-c"
+      - "/bin/echo 'db:5432:*:postgres:postgres' > /tmp/pgpassfile && chmod 0600 /tmp/pgpassfile && /entrypoint.sh"
+      - 
+
 

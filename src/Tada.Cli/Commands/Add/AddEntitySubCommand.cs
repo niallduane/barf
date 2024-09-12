@@ -38,7 +38,7 @@ public class AddEntitySubCommand : Command
             {
         @"// <!-- tada injection token -->",
         $@"// <!-- tada injection token -->
-    public virtual DbSet<{name}> {name}s {{ get; set; }}
+    public DbSet<{name}> {name}s => Set<{name}>();
 "
             }
         });
