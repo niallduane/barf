@@ -16,7 +16,7 @@ public class AddGithubSubCommand : Command
 
         var shell = new ProcessShell();
         shell.Execute("dotnet", "new install Tada.TemplatePack");
-        shell.Execute("dotnet", $"new tada-sln-github --nameSpace {ns}");
+        shell.Execute("dotnet", $"new tada-sln-github");
 
         ConsoleWriter.Success($"github workflows and templates added");
     }

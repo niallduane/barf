@@ -21,7 +21,7 @@ public class DatabaseContext : DbContext
             Assembly.GetAssembly(typeof(DatabaseContext))
                 ?? throw new InvalidOperationException(
                     "Unable to get assembly for applying configurations from entities."
-                );
+                )
         );
         base.OnModelCreating(modelBuilder);
     }
