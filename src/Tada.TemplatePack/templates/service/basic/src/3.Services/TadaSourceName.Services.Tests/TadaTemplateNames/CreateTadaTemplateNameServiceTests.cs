@@ -1,20 +1,21 @@
 using TadaSourceName.Domain.Services.TadaTemplateNames.Models;
 
+using Bogus;
+
 namespace TadaSourceName.Services.Tests.TadaTemplateNames;
 
 public class CreateTadaTemplateNameServiceTests : TadaTemplateNameServiceFixture
 {
+    private readonly Faker<CreateTadaTemplateNameRequest> tadatemplatename = new Faker<CreateTadaTemplateNameRequest>();
+
     public CreateTadaTemplateNameServiceTests() : base()
     {
     }
 
-    [Fact(Skip = "todo: check that create was successful")]
+    [Fact]
     public async Task CreateTadaTemplateName_Success()
     {
-        var request = new CreateTadaTemplateNameRequest
-        {
-
-        };
+        var request = tadatemplatename.Generate();
 
         var result = await context.CreateTadaTemplateName(request);
 

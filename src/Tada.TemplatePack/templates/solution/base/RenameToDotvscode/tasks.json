@@ -79,7 +79,7 @@
         {
             "label": "Add Service",
             "type": "shell",
-            "command": "tada add service ${input:serviceName} --type ${input:serviceType}",
+            "command": "tada add service ${input:serviceName} ${input:serviceWithEntity}  ${input:serviceWithRepository} ${input:serviceWithValidations}",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
@@ -158,24 +158,52 @@
             "description": "Enter the name of the new repository"
         },
         {
-            "id": "serviceType",
+            "id": "serviceWithEntity",
             "type": "pickString",
-            "description": "service template",
+            "description": "Add database entity",
             "options": [
                 {
-                    "label": "Basic",
-                    "value": "basic"
+                    "label": "Yes",
+                    "value": "--entity"
                 },
                 {
-                    "label": "Service with repository pattern only",
-                    "value": "excludeentity"
-                },
-                {
-                    "label": "Full (with entity and repository pattern)",
-                    "value": "full"
+                    "label": "No",
+                    "value": ""
                 }
             ],
-            "default": "basic"
+            "default": "--entity"
+        },
+        {
+            "id": "serviceWithRepository",
+            "type": "pickString",
+            "description": "Add database repository",
+            "options": [
+                {
+                    "label": "Yes",
+                    "value": ""
+                },
+                {
+                    "label": "No",
+                    "value": "--no-repository"
+                }
+            ],
+            "default": ""
+        },
+        {
+            "id": "serviceWithValidations",
+            "type": "pickString",
+            "description": "Add service validations",
+            "options": [
+                {
+                    "label": "Yes",
+                    "value": ""
+                },
+                {
+                    "label": "No",
+                    "value": "--no-validations"
+                }
+            ],
+            "default": ""
         }
     ]
 }

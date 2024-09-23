@@ -1,3 +1,5 @@
+using Moq;
+
 namespace TadaSourceName.Services.Tests.TadaTemplateNames;
 
 public class DeleteTadaTemplateNameServiceTests : TadaTemplateNameServiceFixture
@@ -8,12 +10,18 @@ public class DeleteTadaTemplateNameServiceTests : TadaTemplateNameServiceFixture
 
     }
 
-    [Theory(Skip = "todo: check that delete was successful")]
-    [InlineData("00000000-0000-0000-0000-000000000000")]
-    public async Task DeleteTadaTemplateName_Success(string id)
+    [Fact]
+    public async Task DeleteTadaTemplateName_Success()
     {
-        var result = await context.DeleteTadaTemplateName(id);
+        #if(use_repository)
+        var expected = Guid.NewGuid();
+        mockTadaTemplateNameRepository.Setup(x => x.Delete(It.IsAny<Guid>()));
+        var result = await context.DeleteTadaTemplateName(expected.ToString());
 
+        Assert.NotNull(result);
         //todo: check that delete was successful
+        #else
+        throw new NotImplementedException();
+        #endif
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TadaSourceName.Domain.Core;
 using TadaSourceName.Infrastructure.Database.Entities;
 using TadaSourceName.Infrastructure.Database.Repositories.TadaTemplateNames;
+using TadaSourceName.Infrastructure.Database.Tests.Factories;
 
 namespace TadaSourceName.Infrastructure.Database.Tests;
 
@@ -75,7 +76,7 @@ public class TadaTemplateNameRepositoryTests
 
         await _repository!.Delete(expected.TadaTemplateNameId);
 
-        var result = await _tadaTemplateNameFactorybContext.TadaTemplateNames.FirstOrDefaultAsync(item => item.TadaTemplateNameId == expected.TadaTemplateNameId);
+        var result = await _dbContext.TadaTemplateNames.FirstOrDefaultAsync(item => item.TadaTemplateNameId == expected.TadaTemplateNameId);
 
         Assert.Null(result);
     }
