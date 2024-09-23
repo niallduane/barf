@@ -14,6 +14,9 @@ dotnet new sln -n "$SOLUTION_NAME";
 dotnet new classlib -n "$SOLUTION_NAME.Domain.Core" -o "./src/1.Domain/$SOLUTION_NAME.Domain.Core";
 dotnet sln add "./src/1.Domain/$SOLUTION_NAME.Domain.Core/$SOLUTION_NAME.Domain.Core.csproj";
 
+dotnet add "./src/1.Domain/$SOLUTION_NAME.Domain.Core/$SOLUTION_NAME.Domain.Core.csproj" package FluentValidation;
+
+
 dotnet new classlib -n "$SOLUTION_NAME.Domain.Services" -o "./src/1.Domain/$SOLUTION_NAME.Domain.Services";
 dotnet add "./src/1.Domain/$SOLUTION_NAME.Domain.Services/$SOLUTION_NAME.Domain.Services.csproj" reference "./src/1.Domain/$SOLUTION_NAME.Domain.Core/$SOLUTION_NAME.Domain.Core.csproj";
 dotnet sln add "./src/1.Domain/$SOLUTION_NAME.Domain.Services/$SOLUTION_NAME.Domain.Services.csproj";
@@ -51,6 +54,8 @@ dotnet add "./src/3.Services/$SOLUTION_NAME.Services/$SOLUTION_NAME.Services.csp
 dotnet add "./src/3.Services/$SOLUTION_NAME.Services/$SOLUTION_NAME.Services.csproj" reference "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database/$SOLUTION_NAME.Infrastructure.Database.csproj";
 dotnet add "./src/3.Services/$SOLUTION_NAME.Services/$SOLUTION_NAME.Services.csproj" reference "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database.Repositories/$SOLUTION_NAME.Infrastructure.Database.Repositories.csproj";
 
+
+dotnet add "./src/3.Services/$SOLUTION_NAME.Services/$SOLUTION_NAME.Services.csproj" package FluentValidation;
 
 dotnet add "./src/3.Services/$SOLUTION_NAME.Services.Tests/$SOLUTION_NAME.Services.Tests.csproj" reference "./src/3.Services/$SOLUTION_NAME.Services/$SOLUTION_NAME.Services.csproj";
 dotnet add "./src/3.Services/$SOLUTION_NAME.Services.Tests/$SOLUTION_NAME.Services.Tests.csproj" reference "./src/2.Infrastructure/Database/$SOLUTION_NAME.Infrastructure.Database.Tests/$SOLUTION_NAME.Infrastructure.Database.Tests.csproj";
