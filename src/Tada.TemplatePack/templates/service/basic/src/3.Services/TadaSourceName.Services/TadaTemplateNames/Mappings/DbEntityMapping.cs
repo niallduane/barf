@@ -1,31 +1,23 @@
-﻿
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TadaSourceName.Domain.Core;
+﻿using TadaSourceName.Domain.Core;
 using TadaSourceName.Domain.Core.Extensions;
 using TadaSourceName.Domain.Services.TadaTemplateNames.Models;
+using TadaSourceName.Infrastructure.Database.Entities;
 
 namespace TadaSourceName.Services.TadaTemplateNames.Mappings;
 
 internal static class DbEntityMapping
 {
-    public static object ToEntity(this CreateTadaTemplateNameRequest obj)
+    public static TadaTemplateName ToEntity(this CreateTadaTemplateNameRequest obj)
     {
-        throw new NotImplementedException();
+        return new TadaTemplateName
+        {
+
+        };
     }
 
-    public static object ToEntity(this UpsertTadaTemplateNameRequest obj)
+    public static TadaTemplateName ToEntity(this UpsertTadaTemplateNameRequest obj)
     {
-        throw new NotImplementedException();
-    }
-
-    public static CreateTadaTemplateNameResponse ToCreateTadaTemplateNameResponse(this object obj)
-    {
-        return new CreateTadaTemplateNameResponse("")
+        return new TadaTemplateName
         {
 
         };
@@ -47,24 +39,41 @@ internal static class DbEntityMapping
         return props;
     }
 
-    public static UpdateTadaTemplateNameResponse ToUpdateTadaTemplateNameResponse(this object obj)
+    public static CreateTadaTemplateNameResponse ToCreateTadaTemplateNameResponse(this TadaTemplateName obj)
     {
-        return new UpdateTadaTemplateNameResponse("")
+        return new CreateTadaTemplateNameResponse(obj.TadaTemplateNameId.ToString())
         {
 
         };
     }
 
-    public static GetTadaTemplateNameResponse ToGetTadaTemplateNameResponse(this object obj)
+    public static UpsertTadaTemplateNameResponse ToUpsertTadaTemplateNameResponse(this TadaTemplateName obj)
     {
-        return new GetTadaTemplateNameResponse("")
+        return new UpsertTadaTemplateNameResponse(obj.TadaTemplateNameId.ToString())
         {
 
         };
     }
-    public static ListTadaTemplateNameItem ToListTadaTemplateNameItem(this object obj)
+
+    public static UpdateTadaTemplateNameResponse ToUpdateTadaTemplateNameResponse(this TadaTemplateName obj)
     {
-        return new ListTadaTemplateNameItem("")
+        return new UpdateTadaTemplateNameResponse(obj.TadaTemplateNameId.ToString())
+        {
+
+        };
+    }
+
+    public static GetTadaTemplateNameResponse ToGetTadaTemplateNameResponse(this TadaTemplateName obj)
+    {
+        return new GetTadaTemplateNameResponse(obj.TadaTemplateNameId.ToString())
+        {
+
+        };
+    }
+
+    public static ListTadaTemplateNameItem ToListTadaTemplateNameItem(this TadaTemplateName obj)
+    {
+        return new ListTadaTemplateNameItem(obj.TadaTemplateNameId.ToString())
         {
 
         };

@@ -17,50 +17,50 @@ public class AddServiceSubCommand : Command
         var name = new Argument<string>
             ("name", "Service name");
 
+        var includeEntity = new Option<bool>("--entity", () => false, "include a database entity");
+        var excludeValidations = new Option<bool>("--no-validations", () => false, "include a database entity");
+        var excludeRepository = new Option<bool>("--no-repository", () => false, "include a database repository");
+        var excludeController = new Option<bool>("--no-controller", () => false, "exclude a service presentation controller");
+
         var templateType = new Option<ServiceTemplateTypes>("--type", () => ServiceTemplateTypes.Basic, "Select the service type");
 
         this.Add(name);
-        this.Add(templateType);
+        this.Add(name);
+        this.Add(includeEntity);
+        this.Add(excludeValidations);
+        this.Add(excludeRepository);
+        this.Add(excludeController);
 
-        this.SetHandler((nameValue, templateTypeValue) => Execute(nameValue, templateTypeValue), name, templateType);
+        this.SetHandler(Execute, name, includeEntity, excludeValidations, excludeRepository, excludeController);
     }
 
-    public void Execute(string name, ServiceTemplateTypes serviceType)
+    public void Execute(string name, bool includeEntity, bool excludeValidations, bool excludeRepository, bool excludeController)
     {
         var config = ConfigurationLoader.LoadTadaFile();
         var ns = config?.Namespace ?? "tada";
-
 
         ConsoleWriter.Start($"Adding {name} service");
 
         var shell = new ProcessShell();
         shell.Execute("dotnet", "new install Tada.TemplatePack");
         shell.Execute("dotnet", $"new tada-domain-service -n {name} --nameSpace {ns}");
-        shell.Execute("dotnet", $"new tada-service-controller -n {name} --nameSpace {ns}");
 
-        if (serviceType == ServiceTemplateTypes.Full)
+        shell.Execute("dotnet", $"new tada-service-basic -n {name} --nameSpace {ns} --use_validators {(!excludeValidations).ToString().ToLower()} --use_repository {(!excludeRepository).ToString().ToLower()}");
+        if (includeEntity) 
         {
             shell.Execute("dotnet", $"new tada-database-entity -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
 
-            shell.Execute("dotnet", $"new tada-database-repository -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
-
-            shell.Execute("dotnet", $"new tada-service-full -n {name} --nameSpace {ns}");
-
             AddEntitySubCommand.UpdateContent(name, ns);
+        }
+        if (!excludeRepository) 
+        {
+
+            shell.Execute("dotnet", $"new tada-database-repository -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
             AddRepositorySubCommand.UpdateContent(name, ns);
         }
-        else if (serviceType == ServiceTemplateTypes.ExcludeEntity )
+        if (!excludeController)
         {
-            shell.Execute("dotnet", $"new tada-database-repository -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
-
-            shell.Execute("dotnet", $"new tada-service-full -n {name} --nameSpace {ns}");
-
-            AddEntitySubCommand.UpdateContent(name, ns);
-            AddRepositorySubCommand.UpdateContent(name, ns);
-        }
-        else
-        {
-            shell.Execute("dotnet", $"new tada-service-basic -n {name} --nameSpace {ns}");
+            shell.Execute("dotnet", $"new tada-service-controller -n {name} --nameSpace {ns}");
         }
 
         UpdateContent(name, ns);

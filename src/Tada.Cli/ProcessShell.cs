@@ -64,6 +64,39 @@ public class ProcessShell
         }
     }
 
+    public void RenameFileInSubdirectories(string originalFileName, string newFileName)
+    {
+        
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            _process.StartInfo.FileName = "powershell.exe";
+            _process.StartInfo.Arguments = $"-Command \"Get-ChildItem -Path . -Recurse -Filter \"{originalFileName}\" | Rename-Item -NewName \"{newFileName}\"\"";
+
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            _process.StartInfo.FileName = "/bin/bash";
+            _process.StartInfo.Arguments = $"-c \"find . -type f -name \"{originalFileName}\" -exec sh -c 'mv \"$0\" \"${{0/oldname/{newFileName}}}\"' {{}} \\;\"";
+        }
+
+        _process.OutputDataReceived += (sender, e) =>
+        {
+            if (!string.IsNullOrEmpty(e.Data))
+                Console.WriteLine(e.Data);
+        };
+        _process.ErrorDataReceived += (sender, e) =>
+        {
+            if (!string.IsNullOrEmpty(e.Data))
+                Console.WriteLine("ERROR: " + e.Data);
+        };
+
+
+        if (_process.Start())
+        {
+            _process.WaitForExit();
+        }
+    }
+
     public void DeleteFileInSubDirectories(string fileName)
     {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))

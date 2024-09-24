@@ -1,28 +1,32 @@
+using TadaSourceName.Domain.Core;
+using TadaSourceName.Domain.Services.TadaTemplateNames.Models;
+
+using Bogus;
+
+using Moq;
+
 namespace TadaSourceName.Services.Tests.TadaTemplateNames;
 
 public class UpdateTadaTemplateNameServiceTests : TadaTemplateNameServiceFixture
 {
+    private readonly Faker<UpdateTadaTemplateNameRequest> tadatemplatename = new Faker<UpdateTadaTemplateNameRequest>();
 
     public UpdateTadaTemplateNameServiceTests() : base()
     {
 
     }
 
-    [Fact(Skip = "todo: check that update was successful")]
-    public void UpdateTadaTemplateName_Success()
+    [Fact]
+    public async Task UpdateTadaTemplateName_Success()
     {
-        // var id = "";
-        // var request = new PatchBodyRequest<UpdateTadaTemplateNameRequest>(
-        //     new UpdateTadaTemplateNameRequest
-        //     {
+        #if(use_repository)
+        var request = new PatchRequest<UpdateTadaTemplateNameRequest>();
 
-        //     }
-        // );
+        var result = await context.UpdateTadaTemplateName(Guid.NewGuid().ToString(), request);
 
-        // var result = await context.UpdateTadaTemplateName(id, request);
-
-        // Assert.NotNull(result);
-
-        //todo: check that update was successful
+        Assert.NotNull(result);
+        #else
+        throw new NotImplementedException();
+        #endif
     }
 }

@@ -24,6 +24,52 @@
       "isRequired": true,
       "replaces": "TadaSourceName",
       "fileRename": "TadaSourceName"
+    },
+    "use_validators": {
+      "type":"parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "use service validators"
+    },
+    "use_repository": {
+      "type":"parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "use database repository"
+    },
+    "TadaUseRepositoryComma": {
+      "type": "generated",
+      "generator": "switch",
+      "datatype": "string",
+      "replaces": "TadaUseRepositoryComma",
+      "parameters": {
+        "cases": [
+          { "condition": "(use_repository == true && use_validators == true)", "value": ","},
+          { "condition": "(use_repository == false)", "value": ""}
+        ]
+      }
     }
-  }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!use_validators)",
+          "exclude": [
+            "**/[Vv]alidators/**"
+          ]
+        }
+      ]
+    },
+    {
+      "modifiers": [
+        {
+          "condition": "(!use_repository)",
+          "exclude": [
+            "**/[Mm]appings/**"
+          ]
+        }
+      ]
+    }
+  ]
 }

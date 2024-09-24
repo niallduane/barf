@@ -16,7 +16,7 @@ public class TadaTemplateName
 
 public class TadaTemplateNameConfiguration: IEntityTypeConfiguration<TadaTemplateName>
 {
-    public void Configure(EntityTypeBuilder<TadaTemplateName> build)
+    public void Configure(EntityTypeBuilder<TadaTemplateName> builder)
     {
 
     }
