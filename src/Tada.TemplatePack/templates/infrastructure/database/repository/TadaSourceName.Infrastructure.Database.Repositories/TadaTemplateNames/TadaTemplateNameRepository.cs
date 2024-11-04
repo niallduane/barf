@@ -39,7 +39,7 @@ public class TadaTemplateNameRepository : ITadaTemplateNameRepository
         return await query.ToPagedListAsync(request);
     }
 
-    public async Task<TadaTemplateName> Create(TadaTemplateName entity)
+    public async Task<TadaTemplateName> CreateTadaTemplateName(TadaTemplateName entity)
     {
         _databaseContext.TadaTemplateNames.Add(entity);
 
@@ -48,7 +48,7 @@ public class TadaTemplateNameRepository : ITadaTemplateNameRepository
         return entity;
     }
 
-    public async Task<TadaTemplateName> Update(Guid id, Dictionary<string, object?> newValues)
+    public async Task<TadaTemplateName> UpdateTadaTemplateName(Guid id, Dictionary<string, object?> newValues)
     {
         var entity = await GetQuery()
             .FirstAsync(tadatemplatename => tadatemplatename.TadaTemplateNameId == id);
@@ -61,7 +61,7 @@ public class TadaTemplateNameRepository : ITadaTemplateNameRepository
         return entity;
     }
 
-    public async Task Delete(Guid id)
+    public async Task DeleteTadaTemplateName(Guid id)
     {
         var entity = await GetQuery()
             .FirstAsync(tadatemplatename => tadatemplatename.TadaTemplateNameId == id);
