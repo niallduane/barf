@@ -24,6 +24,22 @@
       "isRequired": true,
       "replaces": "TadaSourceName",
       "fileRename": "TadaSourceName"
+    },
+    "idType": {
+      "description": "type for id of entity",
+      "dataType": "string",
+      "type": "parameter",
+      "defaultValue": "Guid",
+      "isRequired": false,
+      "replaces": "TadaEntityIdType"
+    },
+    "idTypeNameSpace": {
+      "description": "namespace for type id",
+      "dataType": "string",
+      "type": "parameter",
+      "defaultValue": "",
+      "isRequired": false,
+      "replaces": "TadaIdNameSpace"
     }
   }
 }

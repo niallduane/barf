@@ -7,3 +7,4 @@
 * 1 Add Postgres support
 * 28 Add how to docs
 * 31 service validators
+* 33 Fixes for Template Issues

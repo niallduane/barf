@@ -4,20 +4,17 @@ using TadaSourceName.Domain.Core;
 using TadaSourceName.Domain.Core.Extensions;
 using TadaSourceName.Infrastructure.Database.Extensions;
 using TadaSourceName.Infrastructure.Database.Entities;
-
+#if (TadaIdNameSpace != null) 
+using TadaIdNameSpace;
+#endif 
 namespace TadaSourceName.Infrastructure.Database.Repositories.TadaTemplateNames;
 
-public class TadaTemplateNameRepository : ITadaTemplateNameRepository
+public class TadaTemplateNameRepository(DatabaseContext databaseContext) : ITadaTemplateNameRepository
 {
-    private readonly DatabaseContext _databaseContext;
+    private readonly DatabaseContext _databaseContext = databaseContext;
     private IQueryable<TadaTemplateName> GetQuery() => _databaseContext.TadaTemplateNames;
 
-    public TadaTemplateNameRepository(DatabaseContext databaseContext)
-    {
-        _databaseContext = databaseContext;
-    }
-
-    public Task<TadaTemplateName?> GetTadaTemplateName(Guid id)
+    public Task<TadaTemplateName?> GetTadaTemplateName(TadaEntityIdType id)
     {
         return GetQuery()
             .FirstOrDefaultAsync(tadatemplatename => tadatemplatename.TadaTemplateNameId == id);
@@ -39,7 +36,7 @@ public class TadaTemplateNameRepository : ITadaTemplateNameRepository
         return await query.ToPagedListAsync(request);
     }
 
-    public async Task<TadaTemplateName> Create(TadaTemplateName entity)
+    public async Task<TadaTemplateName> CreateTadaTemplateName(TadaTemplateName entity)
     {
         _databaseContext.TadaTemplateNames.Add(entity);
 
@@ -48,7 +45,7 @@ public class TadaTemplateNameRepository : ITadaTemplateNameRepository
         return entity;
     }
 
-    public async Task<TadaTemplateName> Update(Guid id, Dictionary<string, object?> newValues)
+    public async Task<TadaTemplateName> UpdateTadaTemplateName(TadaEntityIdType id, Dictionary<string, object?> newValues)
     {
         var entity = await GetQuery()
             .FirstAsync(tadatemplatename => tadatemplatename.TadaTemplateNameId == id);
@@ -61,7 +58,7 @@ public class TadaTemplateNameRepository : ITadaTemplateNameRepository
         return entity;
     }
 
-    public async Task Delete(Guid id)
+    public async Task DeleteTadaTemplateName(TadaEntityIdType id)
     {
         var entity = await GetQuery()
             .FirstAsync(tadatemplatename => tadatemplatename.TadaTemplateNameId == id);

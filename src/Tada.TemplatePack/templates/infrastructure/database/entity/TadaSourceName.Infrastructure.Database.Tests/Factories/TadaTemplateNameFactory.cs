@@ -8,7 +8,11 @@ public class TadaTemplateNameFactory : Faker<TadaTemplateName>
 {
     public TadaTemplateNameFactory()
     {
-        RuleFor(entity => entity.TadaTemplateNameId, (f, u) => Guid.NewGuid());
         // Add Rules
+        #if(idType == "Guid")
+            RuleFor(entity => entity.TadaTemplateNameId, (f, u) => Guid.NewGuid());
+        #else
+            RuleFor(entity => entity.TadaTemplateNameId, (f, u) => default);
+        #endif
     }
 }

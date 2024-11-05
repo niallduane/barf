@@ -43,40 +43,55 @@ public class AddServiceSubCommand : Command
 
         var shell = new ProcessShell();
         shell.Execute("dotnet", "new install Tada.TemplatePack");
-        shell.Execute("dotnet", $"new tada-domain-service -n {name} --nameSpace {ns}");
+        shell.Execute("dotnet", $"new tada-domain-service -n {name} --nameSpace {ns} --idType \"{config?.Templates.Entity.IdType}\" --idTypeNameSpace \"{config?.Templates.Entity.IdTypeNameSpace}\"");
 
-        shell.Execute("dotnet", $"new tada-service-basic -n {name} --nameSpace {ns} --use_validators {(!excludeValidations).ToString().ToLower()} --use_repository {(!excludeRepository).ToString().ToLower()}");
+        shell.Execute("dotnet", $"new tada-service-basic -n {name} --nameSpace {ns} --use_validators {(!excludeValidations).ToString().ToLower()} --use_repository {(!excludeRepository).ToString().ToLower()} --idType \"{config?.Templates.Entity.IdType}\" --idTypeNameSpace \"{config?.Templates.Entity.IdTypeNameSpace}\"");
         if (includeEntity) 
         {
-            shell.Execute("dotnet", $"new tada-database-entity -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
+            var entityExists = FileUpdater.FileExists($"src/2.Infrastructure/Database/{ns}.Infrastructure.Database/Entities/{name}.cs");
+            if (!entityExists) {
+                shell.Execute("dotnet", $"new tada-database-entity -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\" --idType \"{config?.Templates.Entity.IdType}\" --idTypeNameSpace \"{config?.Templates.Entity.IdTypeNameSpace}\"");
 
-            AddEntitySubCommand.UpdateContent(name, ns);
+                AddEntitySubCommand.UpdateContent(name, ns);
+            }
         }
-        if (!excludeRepository) 
+        
+        if (!excludeRepository)
         {
-
-            shell.Execute("dotnet", $"new tada-database-repository -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
-            AddRepositorySubCommand.UpdateContent(name, ns);
+            var repositoryExists = FileUpdater.FileExists($"src/2.Infrastructure/Database/{ns}.Infrastructure.Database.Repositories/{name}s/{name}Repository.cs");
+            if (!repositoryExists) 
+            {
+                shell.Execute("dotnet", $"new tada-database-repository -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\" --idType \"{config?.Templates.Entity.IdType}\" --idTypeNameSpace \"{config?.Templates.Entity.IdTypeNameSpace}\"");
+                AddRepositorySubCommand.UpdateContent(name, ns);
+            }
         }
         if (!excludeController)
         {
-            shell.Execute("dotnet", $"new tada-service-controller -n {name} --nameSpace {ns}");
+            shell.Execute("dotnet", $"new tada-service-controller -n {name} --nameSpace {ns} --idType \"{config?.Templates.Entity.IdType}\" --idTypeNameSpace \"{config?.Templates.Entity.IdTypeNameSpace}\"");
         }
 
-        UpdateContent(name, ns);
+        UpdateContent(name, ns, excludeValidations);
 
         shell.DotnetFormat();
 
         ConsoleWriter.Success($"{name} service added");
     }
 
-    public static void UpdateContent(string name, string nameSpace)
+    public static void UpdateContent(string name, string nameSpace, bool excludeValidations = false)
     {
         var serviceRegistration = Path.Combine(Directory.GetCurrentDirectory(), $"src/3.Services/{nameSpace}.Services/DependencyRegistration.cs");
+        var injectValidators = (excludeValidations) ? "":
+        $@"
+        services.AddTransient<{name}s.Validators.Create{name}Validator>();
+        services.AddTransient<{name}s.Validators.Update{name}Validator>();
+        services.AddTransient<{name}s.Validators.Upsert{name}Validator>();
+        ";
+
         FileUpdater.UpdateContent(serviceRegistration,
         @"// <!-- tada injection token -->",
         $@"// <!-- tada injection token -->
         services.AddTransient<Domain.Services.{name}s.I{name}Service, {name}s.{name}Service>();
+        {injectValidators}
         ");
     }
 }

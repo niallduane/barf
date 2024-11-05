@@ -2,6 +2,12 @@ namespace Tada.Cli;
 
 public static class FileUpdater
 {
+    public static bool FileExists(string relativePath) 
+    {
+        var path = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
+        Console.WriteLine($"FileExists: {path}");
+        return File.Exists(path);
+    }
     public static void UpdateContent(string filePath, string oldValue, string newValue)
     {
         if (!File.Exists(filePath))

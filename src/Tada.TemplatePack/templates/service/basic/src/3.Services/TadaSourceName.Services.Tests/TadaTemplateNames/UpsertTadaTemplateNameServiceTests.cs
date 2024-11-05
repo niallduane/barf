@@ -1,4 +1,8 @@
 using TadaSourceName.Domain.Services.TadaTemplateNames.Models;
+using TadaSourceName.Domain.Core;
+#if (TadaIdNameSpace != null) 
+using TadaIdNameSpace;
+#endif 
 
 using Bogus;
 
@@ -10,21 +14,16 @@ public class UpsertTadaTemplateNameServiceTests : TadaTemplateNameServiceFixture
 {
     private readonly Faker<UpsertTadaTemplateNameRequest> tadatemplatename = new Faker<UpsertTadaTemplateNameRequest>();
 
-    public UpsertTadaTemplateNameServiceTests() : base()
-    {
-
-    }
-
     [Fact]
     public async Task UpsertUser_Create_Success()
     {
         #if(use_repository)
-        mockTadaTemplateNameRepository.Setup(x => x.GetTadaTemplateName(It.IsAny<Guid>()))
-            .ReturnsAsync((Guid tadatemplatenameId) => null);
+        mockTadaTemplateNameRepository.Setup(x => x.GetTadaTemplateName(It.IsAny<TadaIdType>()))
+            .ReturnsAsync((TadaIdType tadatemplatenameId) => null);
 
         var request = tadatemplatename.Generate();
 
-        var result = await context.UpsertTadaTemplateName(Guid.NewGuid().ToString(), request);
+        var result = await context.UpsertTadaTemplateName(TadaIdTypeValue, request);
 
         Assert.NotNull(result);
         Assert.False(result.IsEdit);
@@ -37,12 +36,12 @@ public class UpsertTadaTemplateNameServiceTests : TadaTemplateNameServiceFixture
         #if(use_repository)
         var expected = tadatemplatenameFactory.Generate();
 
-        mockTadaTemplateNameRepository.Setup(x => x.GetTadaTemplateName(It.IsAny<Guid>()))
-            .ReturnsAsync((Guid tadatemplatenameId) => expected);
+        mockTadaTemplateNameRepository.Setup(x => x.GetTadaTemplateName(It.IsAny<TadaIdType>()))
+            .ReturnsAsync((TadaIdType tadatemplatenameId) => expected);
 
         var request = tadatemplatename.Generate();
 
-        var result = await context.UpsertTadaTemplateName(Guid.NewGuid().ToString(), request);
+        var result = await context.UpsertTadaTemplateName(TadaIdTypeValue, request);
 
         Assert.NotNull(result);
         Assert.True(result.IsEdit);

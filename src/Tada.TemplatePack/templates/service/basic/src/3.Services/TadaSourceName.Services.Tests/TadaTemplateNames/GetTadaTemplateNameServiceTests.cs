@@ -1,17 +1,15 @@
 using TadaSourceName.Domain.Core;
 using TadaSourceName.Domain.Services.TadaTemplateNames.Models;
 using TadaSourceName.Infrastructure.Database.Entities;
-
+#if (TadaIdNameSpace != null) 
+using TadaIdNameSpace;
+#endif 
 using Moq;
 
 namespace TadaSourceName.Services.Tests.TadaTemplateNames;
 
 public class GetTadaTemplateNameServiceTests : TadaTemplateNameServiceFixture
 {
-    public GetTadaTemplateNameServiceTests() : base()
-    {
-
-    }
 
     [Fact]
     public async Task GetTadaTemplateName()
@@ -19,10 +17,10 @@ public class GetTadaTemplateNameServiceTests : TadaTemplateNameServiceFixture
         #if(use_repository)
         var expected = tadatemplatenameFactory.Generate();
 
-        mockTadaTemplateNameRepository.Setup(x => x.GetTadaTemplateName(It.IsAny<Guid>()))
-            .ReturnsAsync((Guid tadatemplatenameId) => expected);
+        mockTadaTemplateNameRepository.Setup(x => x.GetTadaTemplateName(It.IsAny<TadaIdType>()))
+            .ReturnsAsync((TadaIdType tadatemplatenameId) => expected);
 
-        var result = await context.GetTadaTemplateName(expected.TadaTemplateNameId.ToString());
+        var result = await context.GetTadaTemplateName(expected.TadaTemplateNameId);
 
         Assert.NotNull(result);
         Assert.Equal(expected.TadaTemplateNameId.ToString(), result.Id);
@@ -48,7 +46,7 @@ public class GetTadaTemplateNameServiceTests : TadaTemplateNameServiceFixture
 
         expected.ForEach(expectedItem =>
         {
-            var item = result.First(resultItem => resultItem.Id == expectedItem.TadaTemplateNameId.ToString());
+            var item = result.First(resultItem => resultItem.Id == expectedItem.TadaTemplateNameId);
             Assert.NotNull(item);
         });
         Assert.Equal(50, result.Count);
