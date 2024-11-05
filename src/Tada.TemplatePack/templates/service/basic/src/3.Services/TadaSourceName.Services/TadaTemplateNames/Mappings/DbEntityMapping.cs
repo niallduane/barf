@@ -1,7 +1,11 @@
-﻿using TadaSourceName.Domain.Core;
-using TadaSourceName.Domain.Core.Extensions;
+﻿using TadaSourceName.Domain.Core.Extensions;
 using TadaSourceName.Domain.Services.TadaTemplateNames.Models;
 using TadaSourceName.Infrastructure.Database.Entities;
+using TadaSourceName.Domain.Core;
+#if (TadaIdNameSpace != null) 
+using TadaIdNameSpace;
+#endif 
+
 
 namespace TadaSourceName.Services.TadaTemplateNames.Mappings;
 
@@ -41,7 +45,7 @@ internal static class DbEntityMapping
 
     public static CreateTadaTemplateNameResponse ToCreateTadaTemplateNameResponse(this TadaTemplateName obj)
     {
-        return new CreateTadaTemplateNameResponse(obj.TadaTemplateNameId.ToString())
+        return new CreateTadaTemplateNameResponse(obj.TadaTemplateNameId)
         {
 
         };
@@ -49,7 +53,7 @@ internal static class DbEntityMapping
 
     public static UpsertTadaTemplateNameResponse ToUpsertTadaTemplateNameResponse(this TadaTemplateName obj)
     {
-        return new UpsertTadaTemplateNameResponse(obj.TadaTemplateNameId.ToString())
+        return new UpsertTadaTemplateNameResponse(obj.TadaTemplateNameId)
         {
 
         };
@@ -57,7 +61,7 @@ internal static class DbEntityMapping
 
     public static UpdateTadaTemplateNameResponse ToUpdateTadaTemplateNameResponse(this TadaTemplateName obj)
     {
-        return new UpdateTadaTemplateNameResponse(obj.TadaTemplateNameId.ToString())
+        return new UpdateTadaTemplateNameResponse(obj.TadaTemplateNameId)
         {
 
         };
@@ -65,7 +69,7 @@ internal static class DbEntityMapping
 
     public static GetTadaTemplateNameResponse ToGetTadaTemplateNameResponse(this TadaTemplateName obj)
     {
-        return new GetTadaTemplateNameResponse(obj.TadaTemplateNameId.ToString())
+        return new GetTadaTemplateNameResponse(obj.TadaTemplateNameId)
         {
 
         };
@@ -73,7 +77,7 @@ internal static class DbEntityMapping
 
     public static ListTadaTemplateNameItem ToListTadaTemplateNameItem(this TadaTemplateName obj)
     {
-        return new ListTadaTemplateNameItem(obj.TadaTemplateNameId.ToString())
+        return new ListTadaTemplateNameItem(obj.TadaTemplateNameId)
         {
 
         };

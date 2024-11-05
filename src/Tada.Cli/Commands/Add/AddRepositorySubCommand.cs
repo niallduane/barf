@@ -23,7 +23,7 @@ public class AddRepositorySubCommand : Command
 
         var shell = new ProcessShell();
         shell.Execute("dotnet", "new install Tada.TemplatePack");
-        shell.Execute("dotnet", $"new tada-database-repository -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"");
+        shell.Execute("dotnet", $"new tada-database-repository -n {name} --nameSpace {ns} -o \"./src/2.Infrastructure/Database/\"  --idType \"{config?.Templates.Entity.IdType}\" --idTypeNameSpace \"{config?.Templates.Entity.IdTypeNameSpace}\"");
 
         UpdateContent(name, ns);
 

@@ -10,6 +10,7 @@ public class TadaConfiguration
     public DatabaseConfiguration? Database { get; set; }
     [JsonPropertyName("app")]
     public AppConfiguration App { get; set; } = new();
+    public TemplatePackConfiguration Templates {get;set;} = new();
     [JsonIgnore]
     public string? WorkingDirectory { get; set; }
 }

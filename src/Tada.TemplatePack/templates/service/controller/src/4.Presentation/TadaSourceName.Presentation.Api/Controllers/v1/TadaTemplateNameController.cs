@@ -2,6 +2,9 @@ using TadaSourceName.Domain.Core;
 using TadaSourceName.Domain.Services.TadaTemplateNames;
 using TadaSourceName.Domain.Services.TadaTemplateNames.Models;
 using TadaSourceName.Presentation.Api.Attributes;
+#if (TadaIdNameSpace != null) 
+using TadaIdNameSpace;
+#endif 
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,18 +15,15 @@ namespace TadaSourceName.Presentation.Api.Controllers.v1;
 [ApiController]
 [Route("v{version:apiVersion}/[controller]s")]
 [ApiVersion("1")]
-public class TadaTemplateNameController : HateoasController
+public class TadaTemplateNameController(
+        ITadaTemplateNameService tadatemplatenameService, 
+        LinkGenerator linkGenerator
+    ) : HateoasController(linkGenerator)
 {
-    private readonly ITadaTemplateNameService _tadatemplatenameService;
+    private readonly ITadaTemplateNameService _tadatemplatenameService = tadatemplatenameService;
     protected override string? SelfLinkMethodName => nameof(GetTadaTemplateName);
     protected override string? UpdateLinkMethodName => nameof(UpdateTadaTemplateName);
     protected override string? DeleteLinkMethodName => nameof(DeleteTadaTemplateName);
-
-
-    public TadaTemplateNameController(ITadaTemplateNameService tadatemplatenameService, LinkGenerator linkGenerator) : base(linkGenerator)
-    {
-        this._tadatemplatenameService = tadatemplatenameService;
-    }
 
     /// <summary>
     /// Get TadaTemplateName by id
@@ -34,7 +34,7 @@ public class TadaTemplateNameController : HateoasController
     [SwaggerOperation(OperationId = "GetTadaTemplateName", Description = "Get TadaTemplateName by id")]
     [ProducesResponseType(typeof(ApiResponse<GetTadaTemplateNameResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<ApiResponse<GetTadaTemplateNameResponse>> GetTadaTemplateName([FromRoute] string id)
+    public async Task<ApiResponse<GetTadaTemplateNameResponse>> GetTadaTemplateName([FromRoute] TadaIdType id)
     {
         var item = await _tadatemplatenameService.GetTadaTemplateName(id);
         ApplyLinks(item);
@@ -85,7 +85,7 @@ public class TadaTemplateNameController : HateoasController
     [ProducesResponseType(typeof(ApiResponse<CreateTadaTemplateNameResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<CreateTadaTemplateNameResponse>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpsertTadaTemplateName([FromRoute] string id, [FromBody] UpsertTadaTemplateNameRequest body)
+    public async Task<IActionResult> UpsertTadaTemplateName([FromRoute] TadaIdType id, [FromBody] UpsertTadaTemplateNameRequest body)
     {
         var item = await _tadatemplatenameService.UpsertTadaTemplateName(id, body);
         ApplyLinks(item.Response);
@@ -106,7 +106,7 @@ public class TadaTemplateNameController : HateoasController
 
     [ProducesResponseType(typeof(ApiResponse<UpdateTadaTemplateNameResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateTadaTemplateName([FromRoute] string id, [FromRequestPatch] PatchRequest<UpdateTadaTemplateNameRequest> body)
+    public async Task<IActionResult> UpdateTadaTemplateName([FromRoute] TadaIdType id, [FromRequestPatch] PatchRequest<UpdateTadaTemplateNameRequest> body)
     {
         if (!this.TryValidateModel(body.Model!))
         {
@@ -127,7 +127,7 @@ public class TadaTemplateNameController : HateoasController
     [SwaggerOperation(OperationId = "DeleteTadaTemplateName", Description = "Delete TadaTemplateName")]
     [ProducesResponseType(typeof(ApiResponse<DeleteTadaTemplateNameResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<ApiResponse<DeleteTadaTemplateNameResponse>> DeleteTadaTemplateName([FromRoute] string id)
+    public async Task<ApiResponse<DeleteTadaTemplateNameResponse>> DeleteTadaTemplateName([FromRoute] TadaIdType id)
     {
         var response = await _tadatemplatenameService.DeleteTadaTemplateName(id);
         return new ApiResponse<DeleteTadaTemplateNameResponse>(StatusCodes.Status200OK, response);

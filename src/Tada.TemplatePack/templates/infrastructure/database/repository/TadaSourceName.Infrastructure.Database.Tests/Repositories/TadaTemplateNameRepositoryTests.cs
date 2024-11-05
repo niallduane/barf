@@ -48,7 +48,7 @@ public class TadaTemplateNameRepositoryTests
     public async Task Create_Success()
     {
         var request = _tadatemplatenameFactory.Generate();
-        var result = await _repository!.Create(request);
+        var result = await _repository!.CreateTadaTemplateName(request);
 
         Assert.NotNull(result);
         //todo: add more test asserts
@@ -58,7 +58,7 @@ public class TadaTemplateNameRepositoryTests
     public async Task Update_Success()
     {
         var item = await _dbContext.TadaTemplateNames.FirstAsync();
-        var result = await _repository!.Update(item.TadaTemplateNameId, new Dictionary<string, object>()
+        var result = await _repository!.UpdateTadaTemplateName(item.TadaTemplateNameId, new Dictionary<string, object?>()
         {
             //Todo: Add properties to update
         });
@@ -74,7 +74,7 @@ public class TadaTemplateNameRepositoryTests
     {
         var expected = await _dbContext.TadaTemplateNames.FirstAsync();
 
-        await _repository!.Delete(expected.TadaTemplateNameId);
+        await _repository!.DeleteTadaTemplateName(expected.TadaTemplateNameId);
 
         var result = await _dbContext.TadaTemplateNames.FirstOrDefaultAsync(item => item.TadaTemplateNameId == expected.TadaTemplateNameId);
 

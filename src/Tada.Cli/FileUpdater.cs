@@ -4,7 +4,9 @@ public static class FileUpdater
 {
     public static bool FileExists(string relativePath) 
     {
-        return File.Exists(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
+        var path = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
+        Console.WriteLine($"FileExists: {path}");
+        return File.Exists(path);
     }
     public static void UpdateContent(string filePath, string oldValue, string newValue)
     {

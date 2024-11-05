@@ -1,14 +1,16 @@
 using System;
 using TadaSourceName.Domain.Core;
 using TadaSourceName.Infrastructure.Database.Entities;
-
+#if (TadaIdNameSpace != null) 
+using TadaIdNameSpace;
+#endif 
 namespace TadaSourceName.Infrastructure.Database.Repositories.TadaTemplateNames;
 
 public interface ITadaTemplateNameRepository
 {
-    Task<TadaTemplateName?> GetTadaTemplateName(Guid id);
+    Task<TadaTemplateName?> GetTadaTemplateName(TadaEntityIdType id);
     Task<PagedList<TadaTemplateName>> ListTadaTemplateNames(BaseListRequest request);
     Task<TadaTemplateName> CreateTadaTemplateName(TadaTemplateName entity);
-    Task<TadaTemplateName> UpdateTadaTemplateName(Guid id, Dictionary<string, object?> newValues);
-    Task DeleteTadaTemplateName(Guid id);
+    Task<TadaTemplateName> UpdateTadaTemplateName(TadaEntityIdType id, Dictionary<string, object?> newValues);
+    Task DeleteTadaTemplateName(TadaEntityIdType id);
 }

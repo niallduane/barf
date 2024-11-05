@@ -48,6 +48,34 @@
           { "condition": "(use_repository == false)", "value": ""}
         ]
       }
+    },
+    "idType": {
+      "description": "type for id",
+      "dataType": "string",
+      "type": "parameter",
+      "defaultValue": "string",
+      "isRequired": false,
+      "replaces": "TadaIdType"
+    },
+    "idTypeNameSpace": {
+      "description": "namespace for type id",
+      "dataType": "string",
+      "type": "parameter",
+      "defaultValue": "",
+      "isRequired": false,
+      "replaces": "TadaIdNameSpace"
+    },
+    "idTypeValue": {
+      "type": "generated",
+      "generator": "switch",
+      "datatype": "string",
+      "replaces": "TadaIdTypeValue",
+      "parameters": {
+        "cases": [
+          { "condition": "(idType == \"string\")", "value": "\"\""},
+          { "condition": "(true)", "value": "default" }
+        ]
+      }
     }
   },
   "sources": [

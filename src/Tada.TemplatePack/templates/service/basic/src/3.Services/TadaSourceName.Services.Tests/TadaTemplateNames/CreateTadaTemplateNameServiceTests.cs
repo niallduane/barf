@@ -8,10 +8,6 @@ public class CreateTadaTemplateNameServiceTests : TadaTemplateNameServiceFixture
 {
     private readonly Faker<CreateTadaTemplateNameRequest> tadatemplatename = new Faker<CreateTadaTemplateNameRequest>();
 
-    public CreateTadaTemplateNameServiceTests() : base()
-    {
-    }
-
     [Fact]
     public async Task CreateTadaTemplateName_Success()
     {

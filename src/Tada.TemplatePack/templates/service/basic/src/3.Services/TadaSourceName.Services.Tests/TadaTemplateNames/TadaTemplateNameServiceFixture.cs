@@ -4,7 +4,9 @@ using TadaSourceName.Infrastructure.Database.Entities;
 using TadaSourceName.Infrastructure.Database.Repositories.TadaTemplateNames;
 using TadaSourceName.Infrastructure.Database.Tests.Factories;
 using TadaSourceName.Services.TadaTemplateNames;
-
+#if (TadaIdNameSpace != null) 
+using TadaIdNameSpace;
+#endif 
 using Moq;
 
 namespace TadaSourceName.Services.Tests.TadaTemplateNames;
@@ -20,15 +22,15 @@ public class TadaTemplateNameServiceFixture
     public TadaTemplateNameServiceFixture()
     {
         #if(use_repository)
-        mockTadaTemplateNameRepository.Setup(x => x.Create(It.IsAny<TadaTemplateName>()))
+        mockTadaTemplateNameRepository.Setup(x => x.CreateTadaTemplateName(It.IsAny<TadaTemplateName>()))
             .ReturnsAsync((TadaTemplateName tadatemplatename) =>
             {
-                tadatemplatename.TadaTemplateNameId = Guid.NewGuid();
+                tadatemplatename.TadaTemplateNameId = new TadaIdType();
                 return tadatemplatename;
             });
 
-        mockTadaTemplateNameRepository.Setup(x => x.Update(It.IsAny<Guid>(), It.IsAny<Dictionary<string, object?>>()))
-            .ReturnsAsync((Guid id, Dictionary<string, object?> newValues) =>
+        mockTadaTemplateNameRepository.Setup(x => x.UpdateTadaTemplateName(It.IsAny<TadaIdType>(), It.IsAny<Dictionary<string, object?>>()))
+            .ReturnsAsync((TadaIdType id, Dictionary<string, object?> newValues) =>
             {
                 return new TadaTemplateName
                 {
@@ -36,8 +38,8 @@ public class TadaTemplateNameServiceFixture
                 };
             });
 
-        mockTadaTemplateNameRepository.Setup(x => x.GetTadaTemplateName(It.IsAny<Guid>()))
-            .ReturnsAsync((Guid tadatemplatenameId) =>
+        mockTadaTemplateNameRepository.Setup(x => x.GetTadaTemplateName(It.IsAny<TadaIdType>()))
+            .ReturnsAsync((TadaIdType tadatemplatenameId) =>
             {
                 var tadatemplatename = tadatemplatenameFactory.Generate();
                 tadatemplatename.TadaTemplateNameId = tadatemplatenameId;
