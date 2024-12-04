@@ -63,7 +63,7 @@ public class TadaTemplateNameService(
 
         var tadatemplatenames = await _tadatemplatenameRepository.ListTadaTemplateNames(request);
 
-        return tadatemplatenames.Map(user => user.ToListTadaTemplateNameItem(), expandableProperties);
+        return tadatemplatenames.Map(tadatemplatename => tadatemplatename.ToListTadaTemplateNameItem(), expandableProperties);
         #else
         throw new NotImplementedException();
         #endif
@@ -102,8 +102,8 @@ public class TadaTemplateNameService(
         await _upsertTadaTemplateNameValidator.ValidateAndThrowAsync((tadatemplatenameId, request));
         #endif
         #if(use_repository)
-        var user = await _tadatemplatenameRepository.GetTadaTemplateName(tadatemplatenameId);
-        if (user == null)
+        var tadatemplatename = await _tadatemplatenameRepository.GetTadaTemplateName(tadatemplatenameId);
+        if (tadatemplatename == null)
         {
             var result = await _tadatemplatenameRepository.CreateTadaTemplateName(request.ToEntity());
             return new UpsertResult<UpsertTadaTemplateNameResponse>(result.ToUpsertTadaTemplateNameResponse(), false);
